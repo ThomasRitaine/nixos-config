@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/zsh.nix
     ../../modules/nixos/vps/applications-backup.nix
+    ../../modules/nixos/vps/firewall.nix
     ./users.nix
   ];
 
@@ -22,12 +23,6 @@
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "fr";
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 22 80 443 ];
-    allowPing = false;
-  };
 
   services.openssh = {
     enable = true;
