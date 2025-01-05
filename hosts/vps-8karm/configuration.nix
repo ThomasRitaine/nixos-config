@@ -7,6 +7,7 @@
     ../../modules/nixos/vps/applications-backup.nix
     ../../modules/nixos/vps/firewall.nix
     ../../modules/nixos/vps/openssh.nix
+    ../../modules/nixos/vps/fail2ban.nix
     ./users.nix
   ];
 
@@ -40,20 +41,4 @@
   ];
 
   virtualisation.docker.enable = true;
-
-
-  services.fail2ban = {
-    enable = true;
-    jails = {
-      sshd = {
-        enabled = true;
-        settings = {
-          port = "ssh";
-          filter = "sshd";
-          logpath = "/var/log/auth.log";
-          maxretry = "5";
-        };
-      };
-    };
-  };
 }
