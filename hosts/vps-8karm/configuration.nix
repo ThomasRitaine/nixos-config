@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/zsh.nix
+    ../../modules/nixos/docker.nix
     ../../modules/nixos/vps/applications-backup.nix
     ../../modules/nixos/vps/firewall.nix
     ../../modules/nixos/vps/openssh.nix
@@ -33,12 +34,9 @@
 
   environment.systemPackages = with pkgs; [
     git
-    docker
     awscli2
     jq
     starship
     neovim
   ];
-
-  virtualisation.docker.enable = true;
 }
