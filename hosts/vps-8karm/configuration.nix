@@ -6,6 +6,7 @@
     ../../modules/nixos/zsh.nix
     ../../modules/nixos/vps/applications-backup.nix
     ../../modules/nixos/vps/firewall.nix
+    ../../modules/nixos/vps/openssh.nix
     ./users.nix
   ];
 
@@ -23,15 +24,6 @@
   time.timeZone = "Europe/Paris";
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "fr";
-
-  services.openssh = {
-    enable = true;
-    settings = {
-      PasswordAuthentication = false;
-      PermitRootLogin = "no";
-      ChallengeResponseAuthentication = false;
-    };
-  };
 
   security.sudo = {
     enable = true;
