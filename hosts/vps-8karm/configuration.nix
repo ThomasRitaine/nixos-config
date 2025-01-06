@@ -13,12 +13,14 @@
   ];
 
   system.stateVersion = "24.05";
+
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
   swapDevices = [
     { device = "/swapfile"; size = 8192; }
   ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   networking.hostName = "vps-8karm";
