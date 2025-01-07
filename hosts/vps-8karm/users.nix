@@ -1,4 +1,5 @@
 { config, pkgs, inputs, ... }:
+
 {
   users.mutableUsers = false;
   users.users = {
