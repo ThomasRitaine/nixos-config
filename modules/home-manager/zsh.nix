@@ -29,10 +29,6 @@
       bindkey "^[[1;5D" backward-word
       source /opt/terminal/init.sh
     '';
-
-    shellAliases = {
-      vi = "nvim";
-    };
   };
 }
 
