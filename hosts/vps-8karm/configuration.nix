@@ -39,6 +39,5 @@
     git
     awscli2
     jq
-    starship
   ];
 }

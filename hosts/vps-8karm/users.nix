@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   users.mutableUsers = false;
@@ -34,6 +34,10 @@
       inherit pkgs;
     };
 
+    myStarshipModule = import ../../modules/home-manager/starship.nix {
+      inherit lib pkgs;
+    };
+
     myZoxideModule = import ../../modules/home-manager/zoxide.nix {
       inherit pkgs;
     };
@@ -49,6 +53,7 @@
 
     commonImports = [
       myZshModule
+      myStarshipModule
       myZoxideModule
       myUpdateFlakeModule
       ./home.nix
