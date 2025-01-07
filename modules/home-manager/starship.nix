@@ -116,15 +116,16 @@
     };
 
     hostname = {
-      format = "[ in $ssh_symbol$hostname]($style)";
+      format = "[ in $hostname]($style)";
       ssh_only = true;
+      ssh_symbol = "";
       style = "fg:#e1eaf8 bg:#769ff0";
       trim_at = "";
     };
 
     directory = {
       format = "[ $path ($read_only )]($style)";
-      read_only = "";
+      read_only = "";
       style = "fg:#f0e68c bg:#3883c5";
       truncate_to_repo = false;
       truncation_length = 5;
@@ -138,7 +139,7 @@
     };
 
     git_status = {
-      format = "([\\[\$all_status\$ahead\$behind\\]](\$style))";
+      format = "([\\[\$all_status\$ahead_behind\\]](\$style))";
       style = "fg:#e9f2ff bg:#3c699a";
     };
 
@@ -184,7 +185,7 @@
     memory_usage = {
       disabled = false;
       format = " $symbol[$ram]($style)";
-      symbol = " ";
+      symbol = "󰍛 ";
       threshold = 66;
     };
   };
