@@ -33,7 +33,6 @@
       bindkey "^H" backward-kill-word
       bindkey "^[[1;5C" forward-word
       bindkey "^[[1;5D" backward-word
-      source /opt/terminal/init.sh
     '';
   };
 }
