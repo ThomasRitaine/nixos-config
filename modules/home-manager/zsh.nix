@@ -1,5 +1,6 @@
 { pkgs, ... }: {
   home.packages = [
+    pkgs.zsh-vi-mode
     pkgs.zsh-autocomplete
     pkgs.zsh-you-should-use
   ];
@@ -12,6 +13,11 @@
     syntaxHighlighting.enable = true;
 
     plugins = [
+      {
+        name = "vi-mode";
+        src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+      }
       {
         name = "zsh-autocomplete";
         src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete/";
