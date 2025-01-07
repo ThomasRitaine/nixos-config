@@ -34,6 +34,10 @@
       inherit pkgs;
     };
 
+    myDistroIconModule = import ../../modules/home-manager/distro-icon.nix {
+      inherit config lib pkgs;
+    };
+
     myStarshipModule = import ../../modules/home-manager/starship.nix {
       inherit lib pkgs;
     };
@@ -53,6 +57,7 @@
 
     commonImports = [
       myZshModule
+      myDistroIconModule
       myStarshipModule
       myZoxideModule
       myUpdateFlakeModule
