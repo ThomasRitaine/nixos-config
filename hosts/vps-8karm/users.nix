@@ -46,6 +46,10 @@
       inherit pkgs;
     };
 
+    myFzfModule = import ../../modules/home-manager/fzf.nix {
+      inherit pkgs;
+    };
+
     myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
       inherit config pkgs;
       hostFlakeName = "vps-8karm";
@@ -60,6 +64,7 @@
       myDistroIconModule
       myStarshipModule
       myZoxideModule
+      myFzfModule
       myUpdateFlakeModule
       ./home.nix
     ];
