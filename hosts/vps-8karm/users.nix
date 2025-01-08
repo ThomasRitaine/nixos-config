@@ -59,6 +59,10 @@
       inherit pkgs;
     };
 
+    myUtilsModule = import ../../modules/home-manager/utils.nix {
+      inherit pkgs;
+    };
+
     commonImports = [
       myZshModule
       myDistroIconModule
@@ -66,6 +70,7 @@
       myZoxideModule
       myFzfModule
       myUpdateFlakeModule
+      myUtilsModule
       ./home.nix
     ];
   in {
