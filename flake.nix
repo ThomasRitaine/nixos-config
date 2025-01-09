@@ -16,6 +16,7 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
+
     nixosConfigurations = {
       vps-8karm = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
@@ -26,5 +27,16 @@
         ];
       };
     };
+
+    homeConfigurations = {
+      laptop-ec = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { system = "x86_64-linux"; };
+        modules = [
+          ./hosts/laptop-ec/home.nix
+          inputs.nixvim.homeManagerModules.nixvim
+        ];
+      };
+    };
+
   };
 }
