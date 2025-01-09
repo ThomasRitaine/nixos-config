@@ -28,6 +28,7 @@ let
     inherit config pkgs inputs;
     updateType = "home-manager";
     hostFlakeName = "laptop-ec";
+    flakePath = "/home/thomas/nix-config";
   };
 
   myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {

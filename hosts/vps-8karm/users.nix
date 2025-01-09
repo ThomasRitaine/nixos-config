@@ -58,6 +58,7 @@
       inherit config pkgs inputs;
       updateType = "nixos";
       hostFlakeName = "vps-8karm";
+      flakePath = "/etc/nixos";
     };
 
     myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {
