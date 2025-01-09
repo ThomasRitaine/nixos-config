@@ -38,6 +38,9 @@ let
   myUtilsModule = import ../../modules/home-manager/utils.nix {
     inherit pkgs;
   };
+
+  myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix
+  ;
 in {
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
@@ -55,6 +58,7 @@ in {
     myUpdateFlakeModule
     myGitThomasModule
     myUtilsModule
+    myWeztermModule
   ];
 
   home.packages = [
