@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ pkgs, email ? "thomas.ritaine@example.com", ... }:
 
 {
   programs.git = {
     enable = true;
     userName  = "Thomas Ritaine";
-    userEmail = "thomas.ritaine@outlook.com";
+    userEmail = "${email}";
   };
 }
 

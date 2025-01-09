@@ -57,6 +57,7 @@
 
     myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {
       inherit pkgs;
+      email = "thomas.ritaine@outlook.com";
     };
 
     myUtilsModule = import ../../modules/home-manager/utils.nix {
