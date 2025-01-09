@@ -25,7 +25,8 @@ let
   };
 
   myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
-    inherit config pkgs;
+    inherit config pkgs inputs;
+    updateType = "home-manager";
     hostFlakeName = "laptop-ec";
   };
 

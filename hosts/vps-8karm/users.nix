@@ -55,7 +55,8 @@
     };
 
     myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
-      inherit config pkgs;
+      inherit config pkgs inputs;
+      updateType = "nixos";
       hostFlakeName = "vps-8karm";
     };
 
