@@ -46,6 +46,10 @@
       inherit pkgs;
     };
 
+    myNixvimModule = import ../../modules/home-manager/nixvim.nix {
+      inherit config pkgs;
+    };
+
     myFzfModule = import ../../modules/home-manager/fzf.nix {
       inherit pkgs;
     };
@@ -69,6 +73,7 @@
       myDistroIconModule
       myStarshipModule
       myZoxideModule
+      myNixvimModule
       myFzfModule
       myUpdateFlakeModule
       myUtilsModule
