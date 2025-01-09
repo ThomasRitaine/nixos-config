@@ -24,6 +24,10 @@ let
     inherit pkgs;
   };
 
+  myLazygitModule = import ../../modules/home-manager/lazygit/lazygit.nix {
+    inherit pkgs;
+  };
+
   myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
     inherit config pkgs inputs;
     updateType = "home-manager";
@@ -56,6 +60,7 @@ in {
     myZoxideModule
     myNixvimModule
     myFzfModule
+    myLazygitModule
     myUpdateFlakeModule
     myGitThomasModule
     myUtilsModule
