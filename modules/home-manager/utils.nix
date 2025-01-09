@@ -1,8 +1,8 @@
 { pkgs, ... }: {
-  home.packages = [
-    pkgs.tree
-    pkgs.onefetch
-    pkgs.fastfetch
+  home.packages = with pkgs; [
+    jq
+    tree
+    onefetch
+    fastfetch
   ];
 }
-
