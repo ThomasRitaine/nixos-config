@@ -4,6 +4,5 @@
     tree
     onefetch
     fastfetch
-    ripgrep
   ];
 }
