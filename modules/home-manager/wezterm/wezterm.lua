@@ -1,5 +1,4 @@
 local wez = require("wezterm")
-local utils = require("lua.utils")
 local appearance = require("lua.appearance")
 local bar = wez.plugin.require("https://github.com/adriankarlen/bar.wezterm")
 local mappings = require("lua.mappings")
