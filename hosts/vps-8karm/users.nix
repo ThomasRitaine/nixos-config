@@ -46,7 +46,7 @@
       inherit pkgs;
     };
 
-    myNixvimModule = import ../../modules/home-manager/nixvim.nix {
+    myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
       inherit config pkgs;
     };
 

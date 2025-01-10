@@ -16,8 +16,8 @@ let
     inherit pkgs;
   };
 
-  myNixvimModule = import ../../modules/home-manager/nixvim.nix {
-    inherit config pkgs;
+  myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
+    inherit config pkgs lib;
   };
 
   myFzfModule = import ../../modules/home-manager/fzf.nix {
