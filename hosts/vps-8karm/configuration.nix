@@ -36,6 +36,5 @@
 
   environment.systemPackages = with pkgs; [
     git
-    awscli2
   ];
 }
