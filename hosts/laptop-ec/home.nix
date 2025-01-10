@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: 
+{ lib, pkgs, ... }:
 let
   myZshModule = import ../../modules/home-manager/zsh.nix {
     inherit pkgs;
