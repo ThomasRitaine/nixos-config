@@ -17,6 +17,7 @@
     # Import lsp and plugins config
     imports = [
       ./lsp.nix
+      ./plugins/conform.nix
       ./plugins/neo-tree.nix
     ];
 
