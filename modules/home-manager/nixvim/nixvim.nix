@@ -14,7 +14,12 @@
 
     extraPlugins = [ pkgs.vimPlugins.lazy-nvim ];
 
-    extraConfigLua =
+    # Import plugin config
+    imports = [
+      ./plugins/neo-tree.nix
+    ];
+
+    extraConfigLuaPre =
       let
         plugins = with pkgs.vimPlugins; [
           LazyVim
