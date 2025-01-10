@@ -23,7 +23,7 @@
         modules = [
           ./hosts/vps-8karm/configuration.nix
           inputs.home-manager.nixosModules.default
-	        inputs.nixvim.homeManagerModules.nixvim
+	        inputs.nixvim.nixosModules.nixvim
         ];
       };
     };
