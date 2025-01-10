@@ -1,5 +1,4 @@
 { config, pkgs, lib, ... }:
-
 {
   programs.nixvim = {
     enable = true;
@@ -13,54 +12,12 @@
       ripgrep
     ];
 
-    extraPlugins = with pkgs.vimPlugins; [
-      lazy-nvim
-      blink-cmp
-      bufferline-nvim
-      cmp-buffer
-      cmp-nvim-lsp
-      cmp-path
-      conform-nvim
-      dashboard-nvim
-      dressing-nvim
-      flash-nvim
-      friendly-snippets
-      gitsigns-nvim
-      grug-far-nvim
-      indent-blankline-nvim
-      lazydev-nvim
-      lualine-nvim
-      luvit-meta
-      neo-tree-nvim
-      noice-nvim
-      nui-nvim
-      nvim-cmp
-      nvim-lint
-      nvim-lspconfig
-      nvim-snippets
-      nvim-treesitter
-      nvim-treesitter-textobjects
-      nvim-ts-autotag
-      persistence-nvim
-      plenary-nvim
-      snacks-nvim
-      telescope-fzf-native-nvim
-      telescope-nvim
-      todo-comments-nvim
-      tokyonight-nvim
-      trouble-nvim
-      ts-comments-nvim
-      which-key-nvim
-      catppuccin-nvim
-      mini-nvim
-      fzf-lua # Explicitly add fzf-lua
-    ];
+    extraPlugins = [ pkgs.vimPlugins.lazy-nvim ];
 
     extraConfigLua =
       let
         plugins = with pkgs.vimPlugins; [
           LazyVim
-          lazy-nvim
           blink-cmp
           bufferline-nvim
           cmp-buffer
@@ -71,6 +28,7 @@
           dressing-nvim
           flash-nvim
           friendly-snippets
+          fzf-lua
           gitsigns-nvim
           grug-far-nvim
           indent-blankline-nvim
@@ -97,7 +55,6 @@
           trouble-nvim
           ts-comments-nvim
           which-key-nvim
-          fzf-lua
           { name = "catppuccin"; path = catppuccin-nvim; }
           { name = "mini.ai"; path = mini-nvim; }
           { name = "mini.icons"; path = mini-nvim; }
@@ -113,22 +70,30 @@
       ''
         require("lazy").setup({
           defaults = {
-            lazy = true
+            lazy = true,
           },
           dev = {
+            -- reuse files from pkgs.vimPlugins.*
             path = "${lazyPath}",
             patterns = { "" },
-            fallback = false
+            -- fallback to download
+            fallback = true,
           },
           spec = {
             { "LazyVim/LazyVim", import = "lazyvim.plugins" },
+            -- The following configs are needed for fixing lazyvim on nix
+            -- force enable telescope-fzf-native.nvim
             { "nvim-telescope/telescope-fzf-native.nvim", enabled = true },
+            -- disable mason.nvim, use config.extraPackages
             { "williamboman/mason-lspconfig.nvim", enabled = false },
             { "williamboman/mason.nvim", enabled = false },
-            { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.ensure_installed = {} end }
-          }
+            -- uncomment to import/override with your plugins
+            -- { import = "plugins" },
+            -- put this line at the end of spec to clear ensure_installed
+            { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.ensure_installed = {} end },
+          },
         })
-      '';
+      ''; 
   };
 }
 
