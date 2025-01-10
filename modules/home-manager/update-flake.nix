@@ -1,6 +1,9 @@
-{ pkgs, updateType ? "default", hostFlakeName ? "default-flake", flakePath ? "/etc/nixos" }:
-
 {
+  pkgs,
+  updateType ? "default",
+  hostFlakeName ? "default-flake",
+  flakePath ? "/etc/nixos",
+}: {
   home.packages = [
     (pkgs.writeShellScriptBin "update" ''
       #!/usr/bin/env bash
@@ -29,4 +32,3 @@
     '')
   ];
 }
-

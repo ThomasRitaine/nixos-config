@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     zsh
   ];
@@ -8,4 +7,3 @@
 
   users.defaultUserShell = pkgs.zsh;
 }
-

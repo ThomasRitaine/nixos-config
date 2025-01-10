@@ -1,10 +1,7 @@
-{ email ? "thomas.ritaine@example.com" }:
-
-{
+{email ? "thomas.ritaine@example.com"}: {
   programs.git = {
     enable = true;
-    userName  = "Thomas Ritaine";
+    userName = "Thomas Ritaine";
     userEmail = "${email}";
   };
 }
-

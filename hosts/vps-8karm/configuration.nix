@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/zsh.nix
@@ -18,10 +16,13 @@
   boot.loader.efi.canTouchEfiVariables = false;
 
   swapDevices = [
-    { device = "/swapfile"; size = 8192; }
+    {
+      device = "/swapfile";
+      size = 8192;
+    }
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking.hostName = "vps-8karm";
 

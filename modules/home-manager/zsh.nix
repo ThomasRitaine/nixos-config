@@ -1,4 +1,4 @@
-{ pkgs }: {
+{pkgs}: {
   home.packages = [
     pkgs.zsh-vi-mode
     # pkgs.zsh-autocomplete
@@ -15,14 +15,14 @@
     plugins = [
       {
         name = "zsh-autocomplete";
-      	src = pkgs.fetchFromGitHub {
-        # src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete/";
-        owner = "marlonrichert";
-        repo = "zsh-autocomplete";
-        rev = "2024-09-04";
-        sha256 = "0NW0TI//qFpUA2Hdx6NaYdQIIUpRSd0Y4NhwBbdssCs=";
-        # sha256 = "1357hygrjwj5vd4cjdvxzrx967f1d2dbqm2rskbz5z1q6jri1hm3";
-	    };
+        src = pkgs.fetchFromGitHub {
+          # src = "${pkgs.zsh-autocomplete}/share/zsh-autocomplete/";
+          owner = "marlonrichert";
+          repo = "zsh-autocomplete";
+          rev = "2024-09-04";
+          sha256 = "0NW0TI//qFpUA2Hdx6NaYdQIIUpRSd0Y4NhwBbdssCs=";
+          # sha256 = "1357hygrjwj5vd4cjdvxzrx967f1d2dbqm2rskbz5z1q6jri1hm3";
+        };
       }
       {
         name = "vi-mode";
@@ -65,4 +65,3 @@
     '';
   };
 }
-

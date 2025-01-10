@@ -1,6 +1,4 @@
-{ pkgs }:
-
-let
+{pkgs}: let
   script = ''
     AWK=${pkgs.gawk}/bin/awk
 
@@ -43,8 +41,7 @@ let
     export DISTRO="$_distro"
     export DISTRO_ICON="$ICON"
   '';
-in
-{
+in {
   programs.zsh.initExtra = ''
     ${script}
   '';

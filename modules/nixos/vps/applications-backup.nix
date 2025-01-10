@@ -1,6 +1,4 @@
-{ pkgs, ... }:
-
-{
+{pkgs, ...}: {
   systemd.services.backup = {
     description = "Run the backup script for app-manager";
     serviceConfig = {
@@ -20,10 +18,9 @@
   };
 
   systemd.timers.backup = {
-    wantedBy = [ "timers.target" ];
+    wantedBy = ["timers.target"];
     timerConfig = {
       OnCalendar = "02:00";
     };
   };
 }
-

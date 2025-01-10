@@ -1,5 +1,8 @@
-{ lib, pkgs, ... }:
-let
+{
+  lib,
+  pkgs,
+  ...
+}: let
   myZshModule = import ../../modules/home-manager/zsh.nix {
     inherit pkgs;
   };
@@ -42,7 +45,6 @@ let
   };
 
   myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix;
-
 in {
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;

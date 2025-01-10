@@ -1,10 +1,7 @@
-{ lib }:
-
-{
+{lib}: {
   programs.starship.enable = true;
 
   programs.starship.settings = {
-
     # Color gradient used : https://huemint.com/gradient-7/#palette=a3aed2-769ff0-3883c5-3c699a-31486e-2a3e4f-1d2230
     # From the brighter to the darker : #a3aed2, #769ff0, #3883c5, #3c699a, #31486e, #2a3e4f, #1d2230
 
@@ -75,13 +72,13 @@
 
       docker = {
         command = ''
-          docker compose $(ls docker-compose*.yml | sed "s/^/-f /") ps -a --format json \
-            | jq -s -r "if . == [] then \"uncreated\" \
-              elif .[0] | type == \"array\" then .[0][0].State? // \"uncreated\" \
-              else .[0].State? // \"uncreated\" \
-	    end"
+               docker compose $(ls docker-compose*.yml | sed "s/^/-f /") ps -a --format json \
+                 | jq -s -r "if . == [] then \"uncreated\" \
+                   elif .[0] | type == \"array\" then .[0][0].State? // \"uncreated\" \
+                   else .[0].State? // \"uncreated\" \
+          end"
         '';
-        detect_files = [ "docker-compose.yml" ];
+        detect_files = ["docker-compose.yml"];
         format = "[ $symbol ($output )]($style)";
         style = "fg:#0db7ed bg:#31486e";
         symbol = " ";
@@ -165,7 +162,7 @@
       disabled = false;
       format = "[  $time ]($style)";
       style = "fg:#c8d2e7 bg:#1d2230";
-      time_format = "%R";   # Hour:Minute Format
+      time_format = "%R"; # Hour:Minute Format
     };
 
     fill = {
@@ -178,7 +175,7 @@
 
     cmd_duration = {
       format = "⌛$duration";
-      min_time = 1000;    # Show command duration over 1,000 milliseconds
+      min_time = 1000; # Show command duration over 1,000 milliseconds
       show_milliseconds = true;
     };
 
@@ -190,4 +187,3 @@
     };
   };
 }
-

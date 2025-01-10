@@ -15,15 +15,19 @@
     };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
-
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: {
     nixosConfigurations = {
       vps-8karm = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/vps-8karm/configuration.nix
-          inputs.home-manager.nixosModules.default {
-            home-manager.sharedModules = [ inputs.nixvim.homeManagerModules.nixvim ];
+          inputs.home-manager.nixosModules.default
+          {
+            home-manager.sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
           }
         ];
       };
@@ -31,7 +35,7 @@
 
     homeConfigurations = {
       laptop-ec = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { system = "x86_64-linux"; };
+        pkgs = import nixpkgs {system = "x86_64-linux";};
         extraSpecialArgs = {inherit inputs;};
         modules = [
           ./hosts/laptop-ec/home.nix
@@ -39,6 +43,5 @@
         ];
       };
     };
-
   };
 }
