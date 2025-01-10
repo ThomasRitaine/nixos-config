@@ -1,15 +1,15 @@
-{ config, lib, pkgs, inputs, ... }: 
+{ config, lib, pkgs, ... }: 
 let
   myZshModule = import ../../modules/home-manager/zsh.nix {
     inherit pkgs;
   };
 
   myDistroIconModule = import ../../modules/home-manager/distro-icon.nix {
-    inherit config lib pkgs;
+    inherit pkgs;
   };
 
   myStarshipModule = import ../../modules/home-manager/starship.nix {
-    inherit lib pkgs;
+    inherit lib;
   };
 
   myZoxideModule = import ../../modules/home-manager/zoxide.nix {
@@ -17,26 +17,23 @@ let
   };
 
   myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
-    inherit config pkgs lib;
+    inherit pkgs lib;
   };
 
-  myFzfModule = import ../../modules/home-manager/fzf.nix {
-    inherit pkgs;
-  };
+  myFzfModule = import ../../modules/home-manager/fzf.nix;
 
   myLazygitModule = import ../../modules/home-manager/lazygit/lazygit.nix {
     inherit pkgs;
   };
 
   myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
-    inherit config pkgs inputs;
+    inherit pkgs;
     updateType = "home-manager";
     hostFlakeName = "laptop-ec";
     flakePath = "/home/thomas/nix-config";
   };
 
   myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {
-    inherit pkgs;
     email = "thomas.ritaine@ext.ec.europa.eu";
   };
 
@@ -44,8 +41,8 @@ let
     inherit pkgs;
   };
 
-  myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix
-  ;
+  myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix;
+
 in {
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
@@ -71,8 +68,6 @@ in {
   ];
 
   home.file = {
-    # Example file management
-    # ".screenrc".source = dotfiles/screenrc;
   };
 
   home.sessionVariables = {

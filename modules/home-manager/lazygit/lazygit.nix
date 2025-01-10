@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs }:
 
 let
   # Function to convert YAML to JSON using yj

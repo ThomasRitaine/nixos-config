@@ -35,11 +35,11 @@
     };
 
     myDistroIconModule = import ../../modules/home-manager/distro-icon.nix {
-      inherit config lib pkgs;
+      inherit pkgs;
     };
 
     myStarshipModule = import ../../modules/home-manager/starship.nix {
-      inherit lib pkgs;
+      inherit lib;
     };
 
     myZoxideModule = import ../../modules/home-manager/zoxide.nix {
@@ -47,22 +47,19 @@
     };
 
     myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
-      inherit config pkgs lib;
+      inherit pkgs lib;
     };
 
-    myFzfModule = import ../../modules/home-manager/fzf.nix {
-      inherit pkgs;
-    };
+    myFzfModule = import ../../modules/home-manager/fzf.nix;
 
     myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
-      inherit config pkgs inputs;
+      inherit pkgs;
       updateType = "nixos";
       hostFlakeName = "vps-8karm";
       flakePath = "/etc/nixos";
     };
 
     myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {
-      inherit pkgs;
       email = "thomas.ritaine@outlook.com";
     };
 

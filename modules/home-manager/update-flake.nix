@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, updateType ? "default", hostFlakeName ? "default-flake", flakePath ? "/etc/nixos", ... }:
+{ pkgs, updateType ? "default", hostFlakeName ? "default-flake", flakePath ? "/etc/nixos" }:
 
 {
   home.packages = [

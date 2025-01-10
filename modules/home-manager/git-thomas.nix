@@ -1,4 +1,4 @@
-{ pkgs, email ? "thomas.ritaine@example.com", ... }:
+{ email ? "thomas.ritaine@example.com" }:
 
 {
   programs.git = {
