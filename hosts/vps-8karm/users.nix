@@ -47,7 +47,7 @@
     };
 
     myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
-      inherit config pkgs;
+      inherit config pkgs lib;
     };
 
     myFzfModule = import ../../modules/home-manager/fzf.nix {
@@ -90,8 +90,8 @@
       };
 
       thomas = { pkgs, ... }: {
-	imports = commonImports ++ [
-	  myGitThomasModule
+	      imports = commonImports ++ [
+	        myGitThomasModule
         ];
       };
 
