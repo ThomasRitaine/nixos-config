@@ -14,8 +14,9 @@
 
     extraPlugins = [ pkgs.vimPlugins.lazy-nvim ];
 
-    # Import plugin config
+    # Import lsp and plugins config
     imports = [
+      ./lsp.nix
       ./plugins/neo-tree.nix
     ];
 
