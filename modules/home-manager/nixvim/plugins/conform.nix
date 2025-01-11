@@ -10,12 +10,15 @@
       settings = {
         formatters_by_ft = {
           nix = ["alejandra"];
+          python = ["isort" "black"];
+          eslint_d = ["eslint_d"];
         };
 
         formatters = {
-          alejandra = {
-            command = lib.getExe pkgs.alejandra;
-          };
+          alejandra.command = lib.getExe pkgs.alejandra;
+          isort.command = lib.getExe pkgs.isort;
+          black.command = lib.getExe pkgs.black;
+          eslint_d.command = lib.getExe pkgs.eslint_d;
         };
 
         luaConfig.post = ''
