@@ -16,11 +16,15 @@
 
     extraPlugins = [pkgs.vimPlugins.lazy-nvim];
 
+    # Activate plugins
+    plugins.lint.enable = true;
+
     # Import lsp and plugins config
     imports = [
       ./lsp.nix
       ./plugins/conform.nix
       ./plugins/neo-tree.nix
+      ./extras/lang/docker.nix
     ];
 
     extraConfigLuaPre = let
