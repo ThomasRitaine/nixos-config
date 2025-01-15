@@ -25,6 +25,8 @@
       ./plugins/conform.nix
       ./plugins/neo-tree.nix
       ./extras/lang/docker.nix
+      ./extras/lang/json.nix
+      ./extras/lang/yaml.nix
     ];
 
     extraConfigLuaPre = let
@@ -118,6 +120,7 @@
           { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.ensure_installed = {} end },
         },
       })
+      vim.o.runtimepath = vim.o.runtimepath .. "," .. "${pkgs.vimPlugins.SchemaStore-nvim}"
     '';
   };
 }

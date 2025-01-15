@@ -9,13 +9,6 @@
       bashls.enable = true;
       html.enable = true;
       cssls.enable = true;
-      jsonls.enable = true;
-      yamlls = {
-        enable = true;
-        settings.yaml.schemas = {
-          "https://json.schemastore.org/github-workflow.json" = "/.github/workflows/*";
-        };
-      };
     };
   };
 }
