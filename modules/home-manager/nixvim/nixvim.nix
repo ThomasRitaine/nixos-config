@@ -33,11 +33,13 @@
       plugins = with pkgs.vimPlugins; [
         LazyVim
         blink-cmp
+        blink-cmp-copilot
         bufferline-nvim
         cmp-buffer
         cmp-nvim-lsp
         cmp-path
         conform-nvim
+        copilot-lua
         dashboard-nvim
         dressing-nvim
         flash-nvim
@@ -116,6 +118,8 @@
           { "williamboman/mason.nvim", enabled = false },
           -- uncomment to import/override with your plugins
           -- { import = "plugins" },
+          -- Import extras
+          { import = "lazyvim.plugins.extras.ai.copilot" },
           -- put this line at the end of spec to clear ensure_installed
           { "nvim-treesitter/nvim-treesitter", opts = function(_, opts) opts.ensure_installed = {} end },
         },
