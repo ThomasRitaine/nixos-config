@@ -8,13 +8,6 @@
       StandardOutput = "append:/home/app-manager/server-config/backup/logs/cron_run.log";
       StandardError = "append:/home/app-manager/server-config/backup/logs/cron_run.log";
     };
-    path = with pkgs; [
-      docker
-      jq
-      gnutar
-      gzip
-      awscli2
-    ];
   };
 
   systemd.timers.backup = {
