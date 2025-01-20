@@ -12,6 +12,11 @@
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
 
+    shellAliases = {
+      l = "ls -lAFh";
+      dc = "docker compose";
+    };
+
     plugins = [
       {
         name = "zsh-autocomplete";
