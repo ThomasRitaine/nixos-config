@@ -19,9 +19,7 @@
     inherit pkgs;
   };
 
-  myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
-    inherit pkgs lib;
-  };
+  myNeovimModule = import ../../modules/home-manager/neovim/neovim.nix;
 
   myFzfModule = import ../../modules/home-manager/fzf.nix;
 
@@ -57,13 +55,14 @@ in {
     myDistroIconModule
     myStarshipModule
     myZoxideModule
-    myNixvimModule
+    myNeovimModule
     myFzfModule
     myLazygitModule
     myUpdateFlakeModule
     myGitThomasModule
     myUtilsModule
     myWeztermModule
+    ../../modules/home-manager/dev-env.nix
   ];
 
   home.packages = [
