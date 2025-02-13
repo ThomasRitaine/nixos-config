@@ -19,7 +19,9 @@
     inherit pkgs;
   };
 
-  myNeovimModule = import ../../modules/home-manager/neovim/neovim.nix;
+  myNeovimModule = import ../../modules/home-manager/neovim/neovim.nix {
+    inherit pkgs;
+  };
 
   myFzfModule = import ../../modules/home-manager/fzf.nix;
 
