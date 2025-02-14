@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }: let
   myZshModule = import ../../modules/home-manager/zsh.nix {
@@ -20,7 +21,7 @@
   };
 
   myNeovimModule = import ../../modules/home-manager/neovim/neovim.nix {
-    inherit pkgs;
+    inherit pkgs config;
   };
 
   myFzfModule = import ../../modules/home-manager/fzf.nix;
