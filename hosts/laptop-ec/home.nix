@@ -4,6 +4,8 @@
   config,
   ...
 }: let
+  flakePath = "/home/thomas/nix-config";
+
   myZshModule = import ../../modules/home-manager/zsh.nix {
     inherit pkgs;
   };
@@ -22,6 +24,7 @@
 
   myNeovimModule = import ../../modules/home-manager/neovim/neovim.nix {
     inherit pkgs config;
+    flakePath = flakePath;
   };
 
   myFzfModule = import ../../modules/home-manager/fzf.nix;
@@ -34,7 +37,7 @@
     inherit pkgs;
     updateType = "home-manager";
     hostFlakeName = "laptop-ec";
-    flakePath = "/home/thomas/nix-config";
+    flakePath = flakePath;
   };
 
   myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {

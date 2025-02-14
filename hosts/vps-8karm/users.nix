@@ -3,7 +3,9 @@
   lib,
   inputs,
   ...
-}: {
+}: let
+  flakePath = "/etc/nixos";
+in {
   users.mutableUsers = false;
   users.users = {
     root = {
@@ -59,7 +61,7 @@
       inherit pkgs;
       updateType = "nixos";
       hostFlakeName = "vps-8karm";
-      flakePath = "/etc/nixos";
+      flakePath = flakePath;
     };
 
     myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {
