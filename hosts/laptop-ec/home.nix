@@ -44,6 +44,10 @@
     email = "thomas.ritaine@ext.ec.europa.eu";
   };
 
+  myKubernetesModule = import ../../modules/home-manager/kubernetes.nix {
+    inherit pkgs lib;
+  };
+
   myUtilsModule = import ../../modules/home-manager/utils.nix {
     inherit pkgs;
   };
@@ -66,6 +70,7 @@ in {
     myLazygitModule
     myUpdateFlakeModule
     myGitThomasModule
+    myKubernetesModule
     myUtilsModule
     myWeztermModule
     ../../modules/home-manager/dev-env.nix
