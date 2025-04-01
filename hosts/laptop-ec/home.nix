@@ -22,7 +22,7 @@
     inherit pkgs;
   };
 
-  myNeovimModule = import ../../modules/home-manager/neovim/neovim.nix {
+  myNeovimModule = import ../../modules/home-manager/neovim/lazyvim.nix {
     inherit pkgs config;
     flakePath = flakePath;
   };
