@@ -13,11 +13,17 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
     self,
     nixpkgs,
+    disko,
     ...
   } @ inputs: {
     nixosConfigurations = {
@@ -25,6 +31,17 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/vps-8karm/configuration.nix
+          inputs.home-manager.nixosModules.default
+          {
+            home-manager.sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
+          }
+        ];
+      };
+      vps-orarm = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./hosts/vps-orarm/configuration.nix
+          disko.nixosModules.disko
           inputs.home-manager.nixosModules.default
           {
             home-manager.sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
