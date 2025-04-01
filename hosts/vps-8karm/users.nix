@@ -35,28 +35,6 @@ in {
   };
 
   home-manager = let
-    myZshModule = import ../../modules/home-manager/zsh.nix {
-      inherit pkgs;
-    };
-
-    myDistroIconModule = import ../../modules/home-manager/distro-icon.nix {
-      inherit pkgs;
-    };
-
-    myStarshipModule = import ../../modules/home-manager/starship.nix {
-      inherit lib;
-    };
-
-    myZoxideModule = import ../../modules/home-manager/zoxide.nix {
-      inherit pkgs;
-    };
-
-    myNixvimModule = import ../../modules/home-manager/nixvim/nixvim.nix {
-      inherit pkgs lib;
-    };
-
-    myFzfModule = import ../../modules/home-manager/fzf.nix;
-
     myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
       inherit pkgs;
       updateType = "nixos";
@@ -68,19 +46,9 @@ in {
       email = "thomas.ritaine@outlook.com";
     };
 
-    myUtilsModule = import ../../modules/home-manager/utils.nix {
-      inherit pkgs;
-    };
-
     commonImports = [
-      myZshModule
-      myDistroIconModule
-      myStarshipModule
-      myZoxideModule
-      myNixvimModule
-      myFzfModule
+      ../../modules/home-manager/profiles/common.nix
       myUpdateFlakeModule
-      myUtilsModule
       ./home.nix
     ];
   in {
