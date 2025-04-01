@@ -8,11 +8,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     
     disko = {
       url = "github:nix-community/disko";
@@ -32,9 +27,6 @@
         modules = [
           ./hosts/vps-8karm/configuration.nix
           inputs.home-manager.nixosModules.default
-          {
-            home-manager.sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
-          }
         ];
       };
       vps-orarm = nixpkgs.lib.nixosSystem {
@@ -43,9 +35,6 @@
           ./hosts/vps-orarm/configuration.nix
           disko.nixosModules.disko
           inputs.home-manager.nixosModules.default
-          {
-            home-manager.sharedModules = [inputs.nixvim.homeManagerModules.nixvim];
-          }
         ];
       };
     };
@@ -56,7 +45,6 @@
         extraSpecialArgs = {inherit inputs;};
         modules = [
           ./hosts/laptop-ec/home.nix
-          inputs.nixvim.homeManagerModules.nixvim
         ];
       };
     };
