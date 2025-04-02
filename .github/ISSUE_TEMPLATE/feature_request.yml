@@ -1,0 +1,80 @@
+name: Feature Request
+description: Suggest a new feature or improvement for the NixOS configuration
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # NixOS Configuration Feature Request
+        Thanks for suggesting a new feature or improvement! Please provide as much detail as possible to help us understand your idea.
+
+  - type: dropdown
+    id: host
+    attributes:
+      label: Target Host
+      description: Which host configuration would this feature affect?
+      options:
+        - laptop-ec
+        - vps-8karm
+        - vps-orarm
+        - all hosts
+        - new host
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: Describe the feature or improvement you'd like to see
+      placeholder: I would like to add support for...
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use Case
+      description: Explain why this feature would be useful
+      placeholder: This would help me to efficiently manage...
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution
+      description: If you have ideas about how to implement this feature, please share them
+      placeholder: This could be implemented by adding a new module that...
+    validations:
+      required: false
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you considered any alternative approaches or features?
+      placeholder: I've also thought about solving this by...
+    validations:
+      required: false
+
+  - type: textarea
+    id: examples
+    attributes:
+      label: Examples
+      description: Are there any examples of this feature in other NixOS configurations or projects?
+      placeholder: This feature is implemented in this repository - [link]...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      options:
+        - label: I have searched existing issues to ensure this feature hasn't already been requested
+          required: true
+        - label: I'm willing to help implement this feature
+          required: false

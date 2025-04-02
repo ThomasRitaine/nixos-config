@@ -1,0 +1,101 @@
+name: Bug Report
+description: Report an issue with the NixOS configuration
+title: "[Bug]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        # NixOS Configuration Bug Report
+        Thanks for taking the time to fill out this bug report! Please provide as much detail as possible to help us diagnose and fix the issue.
+
+  - type: dropdown
+    id: host
+    attributes:
+      label: Affected Host
+      description: Which host configuration is affected by this bug?
+      options:
+        - laptop-ec
+        - vps-8karm
+        - vps-orarm
+        - multiple hosts
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Describe the issue you encountered
+      placeholder: When I run the update script, I get an error about...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen instead?
+      placeholder: The system should successfully update without errors
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      description: How can we reproduce this issue? Please provide detailed steps.
+      placeholder: |
+        1. Clone the repository
+        2. Run `sudo nixos-rebuild switch --flake .#vps-8karm`
+        3. See the error...
+    validations:
+      required: true
+
+  - type: input
+    id: nixos-version
+    attributes:
+      label: NixOS/Nix Version
+      description: What version of NixOS or Nix are you running?
+      placeholder: NixOS 24.05 or nix 2.18.1
+    validations:
+      required: true
+
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware/Platform
+      description: What hardware or platform are you using?
+      placeholder: x86_64 desktop, Raspberry Pi 4, AWS EC2 instance, etc.
+    validations:
+      required: false
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code.
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add any other context about the problem here
+      placeholder: I recently updated the flake.lock file...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-submission checks
+      description: Please confirm the following
+      options:
+        - label: I have pulled the latest changes from the main branch
+          required: true
+        - label: I have checked that this issue hasn't already been reported
+          required: true

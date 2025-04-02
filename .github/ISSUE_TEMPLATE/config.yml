@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: NixOS Documentation
+    url: https://nixos.org/manual/nixos/stable/
+    about: Check the official NixOS documentation for help with configuration issues
+  - name: Nix Discourse Forum
+    url: https://discourse.nixos.org/
+    about: For general questions about NixOS and Nix
