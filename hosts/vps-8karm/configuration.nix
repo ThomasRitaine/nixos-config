@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ ... }: {
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/common-vps.nix
@@ -10,12 +10,10 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = false;
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 8192;
-    }
-  ];
+  swapDevices = [{
+    device = "/swapfile";
+    size = 8192;
+  }];
 
   networking.hostName = "vps-8karm";
 }

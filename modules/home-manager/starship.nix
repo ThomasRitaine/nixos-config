@@ -1,4 +1,4 @@
-{lib, ...}: {
+{ lib, ... }: {
   programs.starship.enable = true;
 
   programs.starship.settings = {
@@ -78,7 +78,7 @@
                    else .[0].State? // \"uncreated\" \
           end"
         '';
-        detect_files = ["docker-compose.yml"];
+        detect_files = [ "docker-compose.yml" ];
         format = "[ $symbol ($output )]($style)";
         style = "fg:#0db7ed bg:#31486e";
         symbol = " ";
@@ -136,7 +136,7 @@
     };
 
     git_status = {
-      format = "([\\[\$all_status\$ahead_behind\\]](\$style))";
+      format = "([\\[$all_status$ahead_behind\\]]($style))";
       style = "fg:#e9f2ff bg:#3c699a";
     };
 
@@ -165,13 +165,9 @@
       time_format = "%R"; # Hour:Minute Format
     };
 
-    fill = {
-      symbol = " ";
-    };
+    fill = { symbol = " "; };
 
-    status = {
-      disabled = false;
-    };
+    status = { disabled = false; };
 
     cmd_duration = {
       format = "⌛$duration";

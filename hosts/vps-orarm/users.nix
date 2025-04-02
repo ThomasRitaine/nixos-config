@@ -1,10 +1,5 @@
-{
-  pkgs,
-  lib,
-  inputs,
-  ...
-}: let
-  flakePath = "/etc/nixos";
+{ pkgs, inputs, ... }:
+let flakePath = "/etc/nixos";
 in {
   users.mutableUsers = false;
   users.users = {
@@ -16,7 +11,7 @@ in {
       isNormalUser = true;
       description = "Thomas";
       home = "/home/thomas";
-      extraGroups = ["wheel" "docker"];
+      extraGroups = [ "wheel" "docker" ];
       hashedPasswordFile = "/etc/nixos/secrets/thomas-password";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFDBWxSC0X5OEFoc+DK8ZmWrDERNQwGzUNG8261IedI Personal VPS ssh key for user thomas"
@@ -26,7 +21,7 @@ in {
       isNormalUser = true;
       description = "App Manager";
       home = "/home/app-manager";
-      extraGroups = ["docker"];
+      extraGroups = [ "docker" ];
       hashedPasswordFile = "/etc/nixos/secrets/app-manager-password";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGhhJyyQRqM+Bq7vBrzwrZIr1hnEbmfrzYXU5kXHIMCm Personal VPS ssh key for user app-manager"
@@ -52,26 +47,18 @@ in {
       ./home.nix
     ];
   in {
-    extraSpecialArgs = {inherit inputs;};
+    extraSpecialArgs = { inherit inputs; };
 
     users = {
-      root = {pkgs, ...}: {
-        imports = commonImports;
+      root = { pkgs, ... }: { imports = commonImports; };
+
+      thomas = { pkgs, ... }: {
+        imports = commonImports ++ [ myGitThomasModule ];
       };
 
-      thomas = {pkgs, ...}: {
-        imports =
-          commonImports
-          ++ [
-            myGitThomasModule
-          ];
-      };
-
-      "app-manager" = {pkgs, ...}: {
+      "app-manager" = { pkgs, ... }: {
         imports = commonImports;
-        home.packages = with pkgs; [
-          awscli2
-        ];
+        home.packages = with pkgs; [ awscli2 ];
       };
     };
   };

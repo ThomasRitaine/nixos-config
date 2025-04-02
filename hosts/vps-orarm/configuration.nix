@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ ... }: {
   imports = [
     ./disk-config.nix
     ./hardware-configuration.nix
@@ -19,12 +19,10 @@
     initrd.systemd.enable = true;
   };
 
-  swapDevices = [
-    {
-      device = "/swapfile";
-      size = 4096;
-    }
-  ];
+  swapDevices = [{
+    device = "/swapfile";
+    size = 4096;
+  }];
 
   networking.hostName = "vps-orarm";
 }

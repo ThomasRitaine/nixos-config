@@ -1,4 +1,5 @@
-{pkgs, ...}: let
+{ pkgs, ... }:
+let
   script = ''
     AWK=${pkgs.gawk}/bin/awk
 

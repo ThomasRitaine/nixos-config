@@ -1,26 +1,17 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
-}: let
+{ lib, pkgs, config, ... }:
+let
   flakePath = "/home/thomas/nix-config";
 
-  myZshModule = import ../../modules/home-manager/zsh.nix {
-    inherit pkgs;
-  };
+  myZshModule = import ../../modules/home-manager/zsh.nix { inherit pkgs; };
 
-  myDistroIconModule = import ../../modules/home-manager/distro-icon.nix {
-    inherit pkgs;
-  };
+  myDistroIconModule =
+    import ../../modules/home-manager/distro-icon.nix { inherit pkgs; };
 
-  myStarshipModule = import ../../modules/home-manager/starship.nix {
-    inherit lib;
-  };
+  myStarshipModule =
+    import ../../modules/home-manager/starship.nix { inherit lib; };
 
-  myZoxideModule = import ../../modules/home-manager/zoxide.nix {
-    inherit pkgs;
-  };
+  myZoxideModule =
+    import ../../modules/home-manager/zoxide.nix { inherit pkgs; };
 
   myNeovimModule = import ../../modules/home-manager/neovim/lazyvim.nix {
     inherit pkgs config;
@@ -29,9 +20,8 @@
 
   myFzfModule = import ../../modules/home-manager/fzf.nix;
 
-  myLazygitModule = import ../../modules/home-manager/lazygit/lazygit.nix {
-    inherit pkgs;
-  };
+  myLazygitModule =
+    import ../../modules/home-manager/lazygit/lazygit.nix { inherit pkgs; };
 
   myUpdateFlakeModule = import ../../modules/home-manager/update-flake.nix {
     inherit pkgs;
@@ -44,13 +34,10 @@
     email = "thomas.ritaine@ext.ec.europa.eu";
   };
 
-  myKubernetesModule = import ../../modules/home-manager/kubernetes.nix {
-    inherit pkgs lib;
-  };
+  myKubernetesModule =
+    import ../../modules/home-manager/kubernetes.nix { inherit pkgs lib; };
 
-  myUtilsModule = import ../../modules/home-manager/utils.nix {
-    inherit pkgs;
-  };
+  myUtilsModule = import ../../modules/home-manager/utils.nix { inherit pkgs; };
 
   myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix;
 in {
@@ -76,12 +63,9 @@ in {
     ../../modules/home-manager/dev-env.nix
   ];
 
-  home.packages = [
-  ];
+  home.packages = [ ];
 
-  home.file = {
-  };
+  home.file = { };
 
-  home.sessionVariables = {
-  };
+  home.sessionVariables = { };
 }
