@@ -1,9 +1,5 @@
 { pkgs, ... }: {
-  home.packages = [
-    pkgs.zsh-vi-mode
-    # pkgs.zsh-autocomplete
-    pkgs.zsh-you-should-use
-  ];
+  home.packages = [ pkgs.zsh-vi-mode pkgs.zsh-you-should-use ];
 
   programs.zsh = {
     enable = true;
@@ -15,6 +11,7 @@
     shellAliases = {
       l = "ls -lAFh";
       dc = "docker compose";
+      k = "kubectl";
     };
 
     plugins = [
@@ -43,9 +40,10 @@
     initExtraFirst = ''
       ## Options section
       setopt interactive_comments                                     # Enable autocomplete, enable comments in the CLI
-      setopt complete_aliases                                         # Complete aliased commands
+      unsetopt completealiases                                        # Fix completion aliases
       setopt correct                                                  # Auto correct mistakes
       setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+      setopt globdots                                                 # Allow dotfiles to be matched with *, and show in autocomplete list
       setopt nocaseglob                                               # Case insensitive globbing
       setopt rcexpandparam                                            # Array expension with parameters
       setopt nocheckjobs                                              # Don't warn about running processes when exiting
