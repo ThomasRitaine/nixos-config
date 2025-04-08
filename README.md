@@ -263,7 +263,7 @@ The repository manages multiple systems with different configurations:
 | Host | Type | OS | Primary Use | Key Features |
 |------|------|--------------|------------|--------------|
 | **vps-8karm** | NixOS | NixOS | Service hosting | Docker, fail2ban, firewall, SSH, app backup |
-| **vps-orarm** | NixOS | NixOS | Services hosting | Same as vps-8karm |
+| **vps-orarm** | NixOS | NixOS | Service hosting | Same as vps-8karm |
 | **laptop-ec** | Home Manager | Ubuntu | Development | Full dev environment, GUI tools |
 
 **Common Components**: All systems share user environment configuration including:
