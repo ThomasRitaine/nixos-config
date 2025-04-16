@@ -2,23 +2,10 @@
 let
   flakePath = "/home/thomas/nix-config";
 
-  myZshModule = import ../../modules/home-manager/zsh.nix { inherit pkgs; };
-
-  myDistroIconModule =
-    import ../../modules/home-manager/distro-icon.nix { inherit pkgs; };
-
-  myStarshipModule =
-    import ../../modules/home-manager/starship.nix { inherit lib; };
-
-  myZoxideModule =
-    import ../../modules/home-manager/zoxide.nix { inherit pkgs; };
-
   myNeovimModule = import ../../modules/home-manager/neovim/lazyvim.nix {
     inherit pkgs config;
     flakePath = flakePath;
   };
-
-  myFzfModule = import ../../modules/home-manager/fzf.nix;
 
   myLazygitModule =
     import ../../modules/home-manager/lazygit/lazygit.nix { inherit pkgs; };
@@ -37,8 +24,6 @@ let
   myKubernetesModule =
     import ../../modules/home-manager/kubernetes.nix { inherit pkgs lib; };
 
-  myUtilsModule = import ../../modules/home-manager/utils.nix { inherit pkgs; };
-
   myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix;
 in {
   home.stateVersion = "24.11";
@@ -48,17 +33,14 @@ in {
   home.homeDirectory = "/home/thomas";
 
   imports = [
-    myZshModule
-    myDistroIconModule
-    myStarshipModule
-    myZoxideModule
+    ../../modules/home-manager/profiles/common.nix
+
+    # Laptop-specific modules
     myNeovimModule
-    myFzfModule
     myLazygitModule
     myUpdateFlakeModule
     myGitThomasModule
     myKubernetesModule
-    myUtilsModule
     myWeztermModule
     ../../modules/home-manager/dev-env.nix
   ];
