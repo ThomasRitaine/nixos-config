@@ -10,5 +10,6 @@
     ../fzf.nix
     ../neovim/base.nix
     ../utils.nix
+    ../kill-process.nix
   ];
 }
