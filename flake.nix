@@ -32,6 +32,13 @@
           inputs.home-manager.nixosModules.default
         ];
       };
+      phoenix86 = nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/phoenix86/configuration.nix
+          inputs.home-manager.nixosModules.default
+        ];
+      };
     };
 
     homeConfigurations = {
