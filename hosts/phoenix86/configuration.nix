@@ -1,8 +1,9 @@
 { ... }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/server/common.nix
     ./users.nix
+    ../../modules/nixos/server/common.nix
+    ../../modules/nixos/cloudflared.nix
   ];
 
   system.stateVersion = "24.11";
