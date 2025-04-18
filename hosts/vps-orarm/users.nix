@@ -1,7 +1,5 @@
-{ pkgs, inputs, ... }:
-let
-  usersModule = import ../../modules/nixos/users/common.nix {
-    inherit pkgs inputs;
-    hostFlakeName = "vps-orarm";
-  };
-in usersModule
+{ ... }: {
+  imports = [ ../../modules/nixos/users/common.nix ];
+
+  hostFlakeName = "vps-orarm";
+}
