@@ -1,7 +1,7 @@
 { ... }: {
   imports = [
     ./hardware-configuration.nix
-    ../../modules/nixos/common-vps.nix
+    ../../modules/nixos/server/common.nix
     ./users.nix
   ];
 
