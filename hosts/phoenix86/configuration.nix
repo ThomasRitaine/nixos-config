@@ -16,4 +16,5 @@
   }];
 
   networking.hostName = "phoenix86";
+  networking.networkmanager.enable = true;
 }
