@@ -18,4 +18,8 @@
 
   networking.hostName = "phoenix86";
   networking.networkmanager.enable = true;
+
+  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitchExternalPower = "ignore";
+  boot.kernelParams = [ "consoleblank=30" ];
 }
