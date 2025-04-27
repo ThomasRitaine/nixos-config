@@ -21,5 +21,11 @@
 
   services.logind.lidSwitch = "ignore";
   services.logind.lidSwitchExternalPower = "ignore";
+  systemd.targets = {
+    sleep.enable = false;
+    suspend.enable = false;
+    hibernate.enable = false;
+    hybrid-sleep.enable = false;
+  };
   boot.kernelParams = [ "consoleblank=30" ];
 }
