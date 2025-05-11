@@ -125,7 +125,7 @@ This configuration uses these technologies:
    sudo ln -sf $(pwd) /etc/nixos
    ```
 
-3. **For Non-NixOS Systems (Any OS that supports Home Manager)
+3. **For Non-NixOS Systems** (Any OS that supports Home Manager)
 
    ```sh
    mkdir -p ~/.config/home-manager
