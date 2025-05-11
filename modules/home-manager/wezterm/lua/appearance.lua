@@ -1,3 +1,4 @@
+local wez = require("wezterm")
 local M = {}
 
 M.apply_to_config = function(c)
@@ -8,6 +9,13 @@ M.apply_to_config = function(c)
 	c.window_padding = { left = "1cell", right = "1cell", top = 0, bottom = 0 }
 	c.window_decorations = "RESIZE"
 	c.show_new_tab_button_in_tab_bar = false
+
+	-- Start WezTerm in fullscreen mode
+	local mux = wez.mux
+	wez.on("gui-startup", function()
+		local tab, pane, window = mux.spawn_window({})
+		window:gui_window():toggle_fullscreen()
+	end)
 end
 
 return M
