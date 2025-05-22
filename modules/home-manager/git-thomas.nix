@@ -3,5 +3,6 @@
     enable = true;
     userName = "Thomas Ritaine";
     userEmail = "${email}";
+    extraConfig.init.defaultBranch = "main";
   };
 }
