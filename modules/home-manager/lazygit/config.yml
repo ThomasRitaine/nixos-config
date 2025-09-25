@@ -136,4 +136,4 @@ customCommands:
               echo "Commit message is empty, commit aborted."
           fi
           rm -f "$COMMIT_MSG_FILE"'
-    subprocess: true
+    output: terminal
