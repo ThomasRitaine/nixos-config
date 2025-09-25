@@ -45,9 +45,11 @@ in {
     ../../modules/home-manager/dev-env.nix
   ];
 
-  home.packages = [ ];
+  home.packages = with pkgs; [ bitwarden-desktop ];
 
   home.file = { };
 
-  home.sessionVariables = { };
+  home.sessionVariables = {
+    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
+  };
 }
