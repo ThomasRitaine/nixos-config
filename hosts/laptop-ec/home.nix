@@ -45,7 +45,7 @@ in {
     ../../modules/home-manager/dev-env.nix
   ];
 
-  home.packages = with pkgs; [ bitwarden-desktop ];
+  home.packages = with pkgs; [ bitwarden-desktop cloudflared ];
 
   home.file = { };
 
