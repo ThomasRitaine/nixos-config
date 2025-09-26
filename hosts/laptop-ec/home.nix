@@ -42,14 +42,13 @@ in {
     myGitThomasModule
     myKubernetesModule
     ../../modules/home-manager/wezterm/wezterm.nix
+    ../../modules/home-manager/bitwarden.nix
     ../../modules/home-manager/dev-env.nix
   ];
 
-  home.packages = with pkgs; [ bitwarden-desktop cloudflared ];
+  home.packages = with pkgs; [ cloudflared ];
 
   home.file = { };
 
-  home.sessionVariables = {
-    SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
-  };
+  home.sessionVariables = { };
 }
