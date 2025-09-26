@@ -25,8 +25,6 @@ let
 
   myKubernetesModule =
     import ../../modules/home-manager/kubernetes.nix { inherit pkgs lib; };
-
-  myWeztermModule = import ../../modules/home-manager/wezterm/wezterm.nix;
 in {
   home.stateVersion = "24.11";
   programs.home-manager.enable = true;
@@ -43,7 +41,7 @@ in {
     myUpdateFlakeModule
     myGitThomasModule
     myKubernetesModule
-    myWeztermModule
+    ../../modules/home-manager/wezterm/wezterm.nix
     ../../modules/home-manager/dev-env.nix
   ];
 
