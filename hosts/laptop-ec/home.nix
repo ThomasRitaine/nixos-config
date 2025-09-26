@@ -19,6 +19,8 @@ let
 
   myGitThomasModule = import ../../modules/home-manager/git-thomas.nix {
     email = "thomas.ritaine@ext.ec.europa.eu";
+    sshSigningKey =
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINfzcGogOrC1eyrQnEpwkQaPBM2fz2MyFXMjq8G8ywuC Thomas Ritaine EXT DIGIT A4 SSH Key";
   };
 
   myKubernetesModule =
