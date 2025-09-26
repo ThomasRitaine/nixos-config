@@ -19,8 +19,8 @@
   networking.hostName = "phoenix86";
   networking.networkmanager.enable = true;
 
-  services.logind.lidSwitch = "ignore";
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   systemd.targets = {
     sleep.enable = false;
     suspend.enable = false;
