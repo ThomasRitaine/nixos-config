@@ -43,7 +43,7 @@ let
     export DISTRO_ICON="$ICON"
   '';
 in {
-  programs.zsh.initExtra = ''
+  programs.zsh.initContent = ''
     ${script}
   '';
 }

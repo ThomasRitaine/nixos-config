@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, lib, ... }: {
   home.packages = [ pkgs.zsh-vi-mode pkgs.zsh-you-should-use ];
 
   programs.zsh = {
@@ -37,7 +37,7 @@
       }
     ];
 
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       ## Options section
       setopt interactive_comments                                     # Enable autocomplete, enable comments in the CLI
       unsetopt completealiases                                        # Fix completion aliases
