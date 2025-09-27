@@ -2,6 +2,7 @@
   imports = [
     ../zsh.nix
     ../docker.nix
+    ../garbage-collector.nix
     ./applications-backup.nix
     ./firewall.nix
     ./openssh.nix
