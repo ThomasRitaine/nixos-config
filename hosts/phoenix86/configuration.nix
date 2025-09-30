@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./hardware-configuration.nix
+    ./remote-desktop.nix
     ./users.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/cloudflared.nix
