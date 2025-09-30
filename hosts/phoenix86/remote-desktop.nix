@@ -8,7 +8,7 @@
 
   boot.initrd.availableKernelModules = [ "i915" ];
 
-  environment.systemPackages = with pkgs; [ rustdesk-flutter xorg.xinput ];
+  environment.systemPackages = with pkgs; [ xorg.xinput ];
 
   users.users.tissou = {
     isNormalUser = true;
@@ -32,7 +32,11 @@
     home.stateVersion = "24.11";
     programs.home-manager.enable = true;
 
-    home.packages = with pkgs; [ firefox gnome-shell-extensions ];
+    home.packages = with pkgs; [
+      rustdesk-flutter
+      firefox
+      gnome-shell-extensions
+    ];
 
     dconf.settings = {
       "org/gnome/desktop/input-sources" = {
