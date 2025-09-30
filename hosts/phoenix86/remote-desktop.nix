@@ -8,7 +8,7 @@
 
   boot.initrd.availableKernelModules = [ "i915" ];
 
-  environment.systemPackages = with pkgs; [ rustdesk-flutter ];
+  environment.systemPackages = with pkgs; [ rustdesk-flutter xorg.xinput ];
 
   users.users.tissou = {
     isNormalUser = true;
@@ -32,10 +32,21 @@
     home.stateVersion = "24.11";
     programs.home-manager.enable = true;
 
+    home.packages = with pkgs; [ gnome-shell-extensions ];
+
     dconf.settings = {
       "org/gnome/desktop/input-sources" = {
         sources = [ (lib.hm.gvariant.mkTuple [ "xkb" "fr" ]) ];
         xkb-options = [ ];
+      };
+
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = [ "desktop-icons@csoriano" ];
+      };
+
+      "org/gnome/nautilus/preferences" = {
+        executable-text-activation = "launch";
       };
     };
 
@@ -49,5 +60,44 @@
       X-GNOME-Autostart-enabled=true
       StartupNotify=false
     '';
+
+    home.file.".config/autostart/disable-laptop-keyboard.desktop".text = ''
+      [Desktop Entry]
+      Type=Application
+      Name=Disable Laptop Keyboard
+      Exec=${pkgs.bash}/bin/bash -c "sleep 5 && ${pkgs.xorg.xinput}/bin/xinput float 12"
+      Hidden=false
+      NoDisplay=true
+      X-GNOME-Autostart-enabled=true
+      StartupNotify=false
+    '';
+
+    home.file.".local/share/applications/enable-keyboard.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=Enable Keyboard
+        Comment=Enable the laptop keyboard
+        Exec=${pkgs.bash}/bin/bash -c "${pkgs.xorg.xinput}/bin/xinput reattach 12 3 && ${pkgs.libnotify}/bin/notify-send 'Keyboard Enabled' 'Laptop keyboard is now active'"
+        Icon=input-keyboard
+        Terminal=false
+        Categories=Utility;
+      '';
+    };
+
+    home.file.".local/share/applications/disable-keyboard.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=Disable Keyboard
+        Comment=Disable the laptop keyboard
+        Exec=${pkgs.bash}/bin/bash -c "${pkgs.xorg.xinput}/bin/xinput float 12 && ${pkgs.libnotify}/bin/notify-send 'Keyboard Disabled' 'Laptop keyboard is now disabled'"
+        Icon=input-keyboard-symbolic
+        Terminal=false
+        Categories=Utility;
+      '';
+    };
   };
 }
