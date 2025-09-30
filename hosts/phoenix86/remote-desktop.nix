@@ -32,7 +32,7 @@
     home.stateVersion = "24.11";
     programs.home-manager.enable = true;
 
-    home.packages = with pkgs; [ gnome-shell-extensions ];
+    home.packages = with pkgs; [ firefox gnome-shell-extensions ];
 
     dconf.settings = {
       "org/gnome/desktop/input-sources" = {
@@ -97,6 +97,20 @@
         Icon=input-keyboard-symbolic
         Terminal=false
         Categories=Utility;
+      '';
+    };
+
+    home.file.".local/share/applications/netflix.desktop" = {
+      text = ''
+        [Desktop Entry]
+        Version=1.0
+        Type=Application
+        Name=Netflix
+        Comment=Open Netflix in fullscreen
+        Exec=${pkgs.firefox}/bin/firefox --kiosk https://www.netflix.com
+        Icon=firefox
+        Terminal=false
+        Categories=AudioVideo;Video;
       '';
     };
   };
