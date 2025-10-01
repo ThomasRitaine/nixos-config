@@ -52,6 +52,10 @@
       "org/gnome/nautilus/preferences" = {
         executable-text-activation = "launch";
       };
+      "org/gnome/mutter" = {
+        experimental-features = [ "scale-monitor-framebuffer" ];
+      };
+      "org/gnome/desktop/interface" = { text-scaling-factor = 2.0; };
     };
 
     home.file.".config/autostart/rustdesk.desktop".text = ''
