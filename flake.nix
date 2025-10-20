@@ -13,9 +13,14 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nixgl = {
+      url = "github:nix-community/nixGL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, disko, ... }@inputs: {
+  outputs = { self, nixpkgs, disko, nixgl, ... }@inputs: {
     nixosConfigurations = {
       vps-8karm = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
@@ -43,7 +48,10 @@
 
     homeConfigurations = {
       laptop-ec = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { system = "x86_64-linux"; };
+        pkgs = import nixpkgs {
+          system = "x86_64-linux";
+          overlays = [ nixgl.overlay ];
+        };
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./hosts/laptop-ec/home.nix ];
       };
