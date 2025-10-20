@@ -44,6 +44,7 @@ in {
     ../../modules/home-manager/wezterm/wezterm.nix
     ../../modules/home-manager/bitwarden.nix
     ../../modules/home-manager/dev-env.nix
+    ../../modules/home-manager/python.nix
   ];
 
   home.packages = with pkgs; [ cloudflared ];
