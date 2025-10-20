@@ -3,7 +3,7 @@
     ../zsh.nix
     ../docker.nix
     ../garbage-collector.nix
-    ./applications-backup.nix
+    ./applications-backup/config.nix
     ./firewall.nix
     ./openssh.nix
     ./fail2ban.nix
