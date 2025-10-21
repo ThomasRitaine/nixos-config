@@ -4,6 +4,7 @@
     ../docker.nix
     ../garbage-collector.nix
     ./applications-backup/config.nix
+    ./traefik/config.nix
     ./firewall.nix
     ./openssh.nix
     ./fail2ban.nix

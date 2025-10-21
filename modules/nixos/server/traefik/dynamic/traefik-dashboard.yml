@@ -1,0 +1,8 @@
+http:
+  routers:
+    traefik-dashboard:
+      rule: "Host(`traefik.vps-8karm.thomas.ritaine.com`)"
+      service: "api@internal"
+      middlewares:
+        - auth-require-login
+        - auth-require-group-admin-vps
