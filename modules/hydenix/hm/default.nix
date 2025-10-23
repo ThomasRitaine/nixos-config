@@ -29,25 +29,32 @@
   ];
 
   home.packages = [ ];
-  hydenix = {
-    hm = {
+
+  hydenix.hm = {
+    enable = true;
+
+    editors.enable = false;
+    git.enable = false;
+
+    terminals.kitty.configText = "confirm_os_window_close 0";
+
+    theme = {
       enable = true;
-
-      editors.enable = false;
-      git.enable = false;
-
-      theme = {
-        enable = true;
-        active = "Catppuccin Mocha";
-        themes = [
-          "Catppuccin Mocha"
-          "Catppuccin Latte"
-          "Decay Green"
-          "Rosé Pine"
-          "Tokyo Night"
-          "Gruvbox Retro"
-        ];
-      };
+      active = "Catppuccin Mocha";
+      themes = [
+        "AncientAlients"
+        "Dracula"
+        "Grukai"
+        "Ice Age"
+        "Pixel Dream"
+        "Synth Wave"
+        "Catppuccin Mocha"
+        "Catppuccin Latte"
+        "Decay Green"
+        "Rosé Pine"
+        "Tokyo Night"
+        "Gruvbox Retro"
+      ];
     };
   };
 }
