@@ -5,5 +5,5 @@
     config.lib.file.mkOutOfStoreSymlink
     "${flakePath}/modules/home-manager/neovim/config";
 
-  home.packages = with pkgs; [ fd ];
+  home.packages = with pkgs; [ fd ripgrep statix ];
 }
