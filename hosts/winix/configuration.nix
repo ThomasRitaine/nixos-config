@@ -67,7 +67,7 @@ in
       "networkmanager"
       "video"
     ];
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
   };
 
   # Hydenix Configuration - Main configuration for the Hydenix desktop environment

@@ -38,6 +38,8 @@
 
     terminals.kitty.configText = "confirm_os_window_close 0";
 
+    shell.fish.enable = true;
+
     theme = {
       enable = true;
       active = "Catppuccin Mocha";

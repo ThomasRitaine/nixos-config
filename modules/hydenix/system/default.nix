@@ -9,4 +9,6 @@
     # pkgs.vscode - hydenix's vscode version
     # pkgs.userPkgs.vscode - your personal nixpkgs version
   ];
+
+  programs.fish.enable = true;
 }
