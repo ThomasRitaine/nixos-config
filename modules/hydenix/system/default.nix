@@ -11,4 +11,6 @@
   ];
 
   programs.fish.enable = true;
+
+  hydenix.gaming.enable = false;
 }
