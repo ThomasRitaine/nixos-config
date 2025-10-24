@@ -1,1 +1,1 @@
-{ imports = [ ./keybindings.nix ./userprefs.nix ]; }
+{ imports = [ ./keybindings.nix ./monitors.nix ./userprefs.nix ]; }
