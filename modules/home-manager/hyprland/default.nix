@@ -1,1 +1,1 @@
-{ imports = [ ./keybindings.nix ]; }
+{ imports = [ ./keybindings.nix ./userprefs.nix ]; }
