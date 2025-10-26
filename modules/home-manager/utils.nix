@@ -10,6 +10,5 @@
     cargo
     gcc
     unzip
-    aichat
   ];
 }
