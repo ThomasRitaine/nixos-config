@@ -1,6 +1,24 @@
 #!/bin/sh
 # POSIX sh compatible script for AI-assisted commit messages
 
+# Check if SSH agent is running (needed for commit signing)
+if ! ssh-add -l >/dev/null 2>&1; then
+  echo "⚠️  Warning: SSH agent is not running or no keys are loaded."
+  echo "This is needed to sign commits with SSH."
+  echo ""
+  printf "Continue anyway? [y/N]: "
+  read -r response
+  case "$response" in
+  [yY][eE][sS] | [yY])
+    echo "Continuing without SSH signing..."
+    ;;
+  *)
+    echo "Commit aborted."
+    exit 1
+    ;;
+  esac
+fi
+
 # Get the staged diff
 DIFF_OUTPUT=$(git diff --cached)
 
