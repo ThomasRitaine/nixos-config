@@ -11,7 +11,7 @@
           "[╭─◀](#a3aed2)"
           "[ \${env_var.DISTRO_ICON} ](fg:#000000 bg:#a3aed2)"
           "[](fg:#a3aed2 bg:#769ff0)"
-          "$username\${custom.user_emoji}"
+          "$username"
           "\${custom.local_hostname}"
           "$hostname"
           "[](fg:#769ff0 bg:#3883c5)"
@@ -38,7 +38,7 @@
           "[❯ ](#a3aed2)"
         ];
 
-        command_timeout = 1500;
+        command_timeout = 1000;
 
         # Shows an icon depending on what distro it is running on
         env_var = {
@@ -49,19 +49,6 @@
         };
 
         custom = {
-          user_emoji = {
-            command = ''
-              if [ "$USER" = "thomas" ]; then
-                echo "🐣"
-              elif [ "$USER" = "root" ]; then
-                echo "👑"
-              fi
-            '';
-            format = "[( $output )]($style)";
-            style = "bg:#769ff0";
-            when = true;
-          };
-
           local_hostname = {
             command = ''[ -z "$SSH_CONNECTION" ] && echo "in "'';
             format = "[( $output )]($style)";
