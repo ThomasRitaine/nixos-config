@@ -74,9 +74,11 @@
       bindd = $mainMod, colon, $d keybindings hint, exec, pkill -x rofi || $scrPath/keybinds_hint.sh c
       unbind = $mainMod, slash
 
-      # Firefox private window on Super Shift B
       $d=[$l|Apps]
+      # Firefox private window on Super Shift B
       bindd = $mainMod Shift, B, $d web browser (private) , exec, firefox --private-window
+      # Bitwarden on Super M
+      bindd = $mainMod, M, $d password manager, exec, bitwarden
     '';
   };
 }
