@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -28,6 +28,12 @@
   ];
 
   home.packages = [ ];
+
+  programs.fish = {
+    interactiveShellInit = lib.mkAfter ''
+      set -gx EDITOR nvim
+    '';
+  };
 
   hydenix.hm = {
     enable = true;
