@@ -41,7 +41,10 @@
     editors.enable = false;
     git.enable = false;
 
-    terminals.kitty.configText = "confirm_os_window_close 0";
+    terminals.kitty.configText = ''
+      confirm_os_window_close 0
+      font_size 12.0
+    '';
 
     shell.fish.enable = true;
 
