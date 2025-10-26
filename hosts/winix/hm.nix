@@ -22,6 +22,7 @@
     ../../modules/home-manager/bitwarden.nix
     ../../modules/home-manager/fzf.nix
     ../../modules/home-manager/python.nix
+    ../../modules/home-manager/starship.nix
     ../../modules/home-manager/utils.nix
     ../../modules/home-manager/zoxide.nix
     ../../modules/home-manager/hyprland
@@ -46,7 +47,10 @@
       font_size 12.0
     '';
 
-    shell.fish.enable = true;
+    shell = {
+      fish.enable = true;
+      starship.enable = false;
+    };
 
     theme = {
       enable = true;
