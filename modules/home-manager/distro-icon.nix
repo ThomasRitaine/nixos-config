@@ -46,4 +46,12 @@ in {
   programs.zsh.initContent = ''
     ${script}
   '';
+
+  programs.fish.shellInit = builtins.readFile
+    (pkgs.runCommand "distro-icon.fish" { buildInputs = [ pkgs.babelfish ]; } ''
+      cat > input.sh << 'EOF'
+      ${script}
+      EOF
+      ${pkgs.babelfish}/bin/babelfish < input.sh > $out
+    '');
 }
