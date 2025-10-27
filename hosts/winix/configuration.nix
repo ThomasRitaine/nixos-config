@@ -33,7 +33,7 @@ in {
 
   users.users.thomas = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" "video" ];
+    extraGroups = [ "wheel" "docker" "networkmanager" "video" ];
     shell = pkgs.fish;
   };
 

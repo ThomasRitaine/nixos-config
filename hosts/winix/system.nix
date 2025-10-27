@@ -1,7 +1,7 @@
 { ... }:
 
 {
-  imports = [ ];
+  imports = [ ../../modules/nixos/docker.nix ];
 
   environment.systemPackages = [ ];
 
