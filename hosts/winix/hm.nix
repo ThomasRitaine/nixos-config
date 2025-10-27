@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 
 {
   imports = [
@@ -21,6 +21,7 @@
 
     ../../modules/home-manager/bitwarden.nix
     ../../modules/home-manager/distro-icon.nix
+    ../../modules/home-manager/fish.nix
     ../../modules/home-manager/fzf.nix
     ../../modules/home-manager/python.nix
     ../../modules/home-manager/starship.nix
@@ -30,12 +31,6 @@
   ];
 
   home.packages = [ ];
-
-  programs.fish = {
-    interactiveShellInit = lib.mkAfter ''
-      set -gx EDITOR nvim
-    '';
-  };
 
   hydenix.hm = {
     enable = true;
