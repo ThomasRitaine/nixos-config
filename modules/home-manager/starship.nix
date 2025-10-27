@@ -50,7 +50,7 @@
 
         custom = {
           local_hostname = {
-            command = ''[ -z "$SSH_CONNECTION" ] && echo "in "'';
+            command = ''sh -c '[ -z "$SSH_CONNECTION" ] && echo "in "' '';
             format = "[( $output )]($style)";
             style = "fg:#e1eaf8 bg:#769ff0";
             when = true;
@@ -73,17 +73,15 @@
 
           giturl = {
             command = ''
-              GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
-              if [[ "$GIT_REMOTE" =~ "github" ]]; then
-                GIT_REMOTE_SYMBOL=" "
-              elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
-                GIT_REMOTE_SYMBOL=" "
-              elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
-                GIT_REMOTE_SYMBOL=" "
-              else
-                GIT_REMOTE_SYMBOL=" "
-              fi
-              echo "$GIT_REMOTE_SYMBOL "
+              sh -c '
+                GIT_REMOTE=$(git ls-remote --get-url 2>/dev/null)
+                case "$GIT_REMOTE" in
+                  *github*) echo "" ;;
+                  *gitlab*) echo "" ;;
+                  *bitbucket*) echo "" ;;
+                  *) echo "" ;;
+                esac
+              '
             '';
             description = "Display symbol for remote Git server";
             format = "[on $output  ]($style)";
