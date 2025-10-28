@@ -1,1 +1,3 @@
-{ imports = [ ./keybindings.nix ./monitors.nix ./userprefs.nix ]; }
+{
+  imports = [ ./hyprlock.nix ./keybindings.nix ./monitors.nix ./userprefs.nix ];
+}
