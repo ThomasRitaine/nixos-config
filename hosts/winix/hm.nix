@@ -41,6 +41,7 @@
     terminals.kitty.configText = ''
       confirm_os_window_close 0
       font_size 12.0
+      window_padding_width 0
 
       font_family JetBrainsMono Nerd Font Mono
       symbol_map U+E000-U+F8FF,U+F0000-U+FFFFF,U+100000-U+10ffff JetBrainsMono Nerd Font
