@@ -74,6 +74,12 @@
       bindd = $mainMod, colon, $d keybindings hint, exec, pkill -x rofi || $scrPath/keybinds_hint.sh c
       unbind = $mainMod, slash
 
+      # Toggle between last opened workspace
+      $d=[$ws|Navigation]
+      unbind = $mainMod, TAB
+      bindd = $mainMod, TAB, $d toggle last workspace, workspace, previous
+      bindd = $mainMod SHIFT, TAB, $d window switcher, exec, pkill -x rofi || $rofi-launch w
+
       $d=[$l|Apps]
       # Firefox private window on Super Shift B
       bindd = $mainMod Shift, B, $d web browser (private) , exec, firefox --private-window
