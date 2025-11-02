@@ -1,12 +1,20 @@
-{ lib, ... }:
-
 {
   programs.fish = {
+    enable = true;
 
-    interactiveShellInit = lib.mkAfter ''
-      set -gx EDITOR nvim
+    interactiveShellInit = ''
+      # Disable greeting
+      set -g fish_greeting
+
+      fastfetch --logo-type kitty-icat
     '';
 
-    shellAliases = { dc = "docker compose"; };
+    shellAliases = {
+      l = "ls -lAFh";
+      dc = "docker compose";
+      md = "mkdir -p";
+    };
+
+    shellAbbrs = { };
   };
 }

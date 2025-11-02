@@ -48,7 +48,7 @@
     '';
 
     shell = {
-      fish.enable = true;
+      fish.enable = false;
       starship.enable = false;
     };
 
