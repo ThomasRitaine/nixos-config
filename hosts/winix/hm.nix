@@ -54,7 +54,7 @@
 
     theme = {
       enable = true;
-      active = "Grukai";
+      active = "Catppuccin Mocha";
       themes = [
         "Grukai"
         "Pixel Dream"
