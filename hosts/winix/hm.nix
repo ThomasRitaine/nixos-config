@@ -19,6 +19,7 @@
     # Lazygit
     (import ../../modules/home-manager/lazygit/lazygit.nix { inherit pkgs; })
 
+    ../../modules/home-manager/hydenix/kitty.nix
     ../../modules/home-manager/bitwarden.nix
     ../../modules/home-manager/distro-icon.nix
     ../../modules/home-manager/fish.nix
@@ -38,15 +39,6 @@
 
     editors.enable = false;
     git.enable = false;
-
-    terminals.kitty.configText = ''
-      confirm_os_window_close 0
-      font_size 12.0
-      window_padding_width 0
-
-      # Use non mono font to display nerd icons with right size
-      font_family CaskaydiaCove Nerd Font
-    '';
 
     shell = {
       fish.enable = false;
