@@ -13,6 +13,9 @@
 
       # Use non mono font to display nerd icons with right size
       font_family CaskaydiaCove Nerd Font
+
+      # Send Ctrl+W for Ctrl+Backspace to delete word backward
+      map ctrl+backspace send_text all \x17
     '';
   };
 }
