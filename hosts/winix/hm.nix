@@ -27,6 +27,7 @@
     ../../modules/home-manager/python.nix
     ../../modules/home-manager/rustdesk.nix
     ../../modules/home-manager/starship.nix
+    ../../modules/home-manager/tmux.nix
     ../../modules/home-manager/utils.nix
     ../../modules/home-manager/zoxide.nix
     ../../modules/home-manager/hyprland

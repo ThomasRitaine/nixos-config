@@ -6,7 +6,9 @@
       # Disable greeting
       set -g fish_greeting
 
-      fastfetch --logo-type kitty-icat
+      if not set -q TMUX
+        fastfetch
+      end
     '';
 
     shellAliases = {
