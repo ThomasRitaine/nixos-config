@@ -40,7 +40,7 @@ in {
   hydenix = {
     enable = true;
     hostname = "winix";
-    timezone = "Europe/Paris";
+    timezone = "Europe/Dublin";
     locale = "en_US.UTF-8";
   };
 
