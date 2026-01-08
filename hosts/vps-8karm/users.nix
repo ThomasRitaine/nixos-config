@@ -1,5 +1,5 @@
 { ... }: {
-  imports = [ ../../modules/nixos/users/common.nix ];
+  imports = [ ../../modules/nixos/server/users.nix ];
 
   hostFlakeName = "vps-8karm";
 }

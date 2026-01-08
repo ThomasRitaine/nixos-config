@@ -44,6 +44,11 @@
     };
 
     home-manager = let
+      homeBaseConfig = {
+        home.stateVersion = "24.11";
+        programs.home-manager.enable = true;
+      };
+
       myUpdateFlakeModule = import ../../home-manager/update-flake.nix {
         inherit pkgs;
         updateType = "nixos";
@@ -56,9 +61,16 @@
       };
 
       commonImports = [
-        ../../home-manager/profiles/common.nix
+        ../../home-manager/fish.nix
+        ../../home-manager/distro-icon.nix
+        ../../home-manager/starship.nix
+        ../../home-manager/zoxide.nix
+        ../../home-manager/fzf.nix
+        ../../home-manager/neovim/base.nix
+        ../../home-manager/tmux.nix
+        ../../home-manager/utils.nix
         myUpdateFlakeModule
-        ./home.nix
+        homeBaseConfig
       ];
     in {
       users = {

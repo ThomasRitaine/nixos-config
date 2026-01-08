@@ -1,6 +1,6 @@
 { pkgs, ... }: {
   imports = [
-    ../zsh.nix
+    ../fish.nix
     ../docker.nix
     ../garbage-collector.nix
     ./applications-backup/config.nix
