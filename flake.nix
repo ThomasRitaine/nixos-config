@@ -24,20 +24,27 @@
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, disko, nixgl, ... }@inputs: {
+  outputs = { self, nixpkgs, disko, nixgl, ... }@inputs:
+    let
+      mkOracleHost = hostname: nixpkgs.lib.nixosSystem {
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./hosts/oracle-vps/configuration.nix
+          disko.nixosModules.disko
+          inputs.home-manager.nixosModules.default
+          {
+            networking.hostName = hostname;
+            hostFlakeName = hostname;
+          }
+        ];
+      };
+    in
+    {
     nixosConfigurations = {
       vps-8karm = nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
         modules = [
           ./hosts/vps-8karm/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
-      };
-      vps-orarm = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/vps-orarm/configuration.nix
-          disko.nixosModules.disko
           inputs.home-manager.nixosModules.default
         ];
       };
@@ -54,6 +61,10 @@
           ./hosts/winix/configuration.nix
         ];
       };
+      # Oracle instances
+      orarm = mkOracleHost "orarm";
+      pharaoh = mkOracleHost "pharaoh";
+      koola = mkOracleHost "koola";
     };
 
     homeConfigurations = {

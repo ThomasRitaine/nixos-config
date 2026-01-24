@@ -23,6 +23,4 @@
     device = "/swapfile";
     size = 4096;
   }];
-
-  networking.hostName = "vps-orarm";
 }
