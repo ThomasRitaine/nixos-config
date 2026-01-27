@@ -152,6 +152,19 @@ sudo nixos-rebuild test --flake .#vps-8karm
 sudo nixos-rebuild switch --flake .#vps-8karm
 ```
 
+#### For Remote Deployment
+
+Example, the koola host, with a configured entry on `~/.ssh/config`:
+
+```sh
+nix run nixpkgs#nixos-rebuild -- switch \
+  --flake .#koola \
+  --target-host koola-thomas \
+  --build-host koola-thomas \
+  --sudo \
+  --ask-sudo-password
+```
+
 #### For Home Manager (Laptop)
 
 ```sh
