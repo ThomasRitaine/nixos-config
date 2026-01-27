@@ -47,11 +47,12 @@ in {
     ${script}
   '';
 
-  programs.fish.shellInit = builtins.readFile
-    (pkgs.runCommand "distro-icon.fish" { buildInputs = [ pkgs.babelfish ]; } ''
+  programs.fish.shellInit = "source ${
+    pkgs.runCommand "distro-icon.fish" { buildInputs = [ pkgs.babelfish ]; } ''
       cat > input.sh << 'EOF'
       ${script}
       EOF
       ${pkgs.babelfish}/bin/babelfish < input.sh > $out
-    '');
+    ''
+  }";
 }
