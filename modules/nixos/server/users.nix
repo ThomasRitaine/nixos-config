@@ -62,6 +62,7 @@
 
       commonImports = [
         ../../home-manager/fish.nix
+        ../../home-manager/comma.nix
         ../../home-manager/distro-icon.nix
         ../../home-manager/starship.nix
         ../../home-manager/zoxide.nix

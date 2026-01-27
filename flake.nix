@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hydenix.url = "github:richen604/hydenix";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
@@ -35,6 +40,7 @@
           {
             networking.hostName = hostname;
             hostFlakeName = hostname;
+            home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
       };
