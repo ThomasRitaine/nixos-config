@@ -1,16 +1,10 @@
-{ pkgs, lib, config, inputs, ... }:
+{ lib, config, inputs, ... }:
 
 {
   options = {
     hostFlakeName = lib.mkOption {
       type = lib.types.str;
       description = "Name of the host in the flake";
-    };
-
-    flakePath = lib.mkOption {
-      type = lib.types.str;
-      default = "/etc/nixos";
-      description = "Path to the flake directory";
     };
   };
 
@@ -55,13 +49,6 @@
         programs.home-manager.enable = true;
       };
 
-      myUpdateFlakeModule = import ../../home-manager/update-flake.nix {
-        inherit pkgs;
-        updateType = "nixos";
-        hostFlakeName = config.hostFlakeName;
-        flakePath = config.flakePath;
-      };
-
       myGitThomasModule = import ../../home-manager/git-thomas.nix {
         email = "thomas.ritaine@outlook.com";
       };
@@ -76,7 +63,6 @@
         ../../home-manager/neovim/base.nix
         ../../home-manager/tmux.nix
         ../../home-manager/utils.nix
-        myUpdateFlakeModule
         homeBaseConfig
       ];
     in {
