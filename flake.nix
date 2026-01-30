@@ -79,15 +79,6 @@
       despo = mkOracleHost "despo";
     };
 
-    homeConfigurations = {
-      laptop-ec = inputs.home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          overlays = [ nixgl.overlay ];
-        };
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./hosts/laptop-ec/home.nix ];
-      };
-    };
+    homeConfigurations = { };
   };
 }
