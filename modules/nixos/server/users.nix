@@ -77,7 +77,6 @@
 
         "app-manager" = { pkgs, ... }: {
           imports = commonImports;
-          home.packages = with pkgs; [ awscli2 ];
         };
       };
     };

@@ -21,6 +21,7 @@ in
   "servers/vps-8karm/thomas-password.age".publicKeys = admins ++ [ vps_8karm ];
   "servers/vps-8karm/root-password.age".publicKeys = admins ++ [ vps_8karm ];
   "servers/vps-8karm/app-manager-password.age".publicKeys = admins ++ [ vps_8karm ];
+  "servers/vps-8karm/applications-backup-env.age".publicKeys = admins ++ [ vps_8karm ];
 
   # --- orarm ---
   "servers/orarm/thomas-password.age".publicKeys = admins ++ [ orarm ];

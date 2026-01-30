@@ -10,13 +10,6 @@ in {
         description = "Enable application backup service";
       };
 
-      environmentFile = lib.mkOption {
-        type = lib.types.path;
-        default = "${config.flakePath}/secrets/backup.env";
-        description =
-          "Path to environment file containing S3_BUCKET_NAME, S3_ENDPOINT, AWS_ACCESS_KEY_ID, and AWS_SECRET_ACCESS_KEY";
-      };
-
       applicationsDir = lib.mkOption {
         type = lib.types.str;
         default = "/home/app-manager/applications";
@@ -38,18 +31,23 @@ in {
   };
 
   config = lib.mkIf cfg.enable {
+    age.secrets.applications-backup-env = {
+      file = ../../../../secrets/servers/${config.hostFlakeName}/applications-backup-env.age;
+      owner = cfg.user;
+    };
+
     systemd.services.application-backup = {
       description = "Backup applications and Docker volumes";
       serviceConfig = {
         Type = "oneshot";
         User = cfg.user;
         ExecStart = "${pkgs.bash}/bin/bash ${./script.sh}";
-        EnvironmentFile = cfg.environmentFile;
+        EnvironmentFile = config.age.secrets.applications-backup-env.path;
         StandardOutput = "append:/var/log/application-backup.log";
         StandardError = "append:/var/log/application-backup.log";
       };
       environment = { APPS_DIR = cfg.applicationsDir; };
-      path = with pkgs; [ docker awscli2 jq gnutar gzip coreutils findutils ];
+      path = with pkgs; [ docker s3cmd jq gnutar gzip coreutils findutils ];
     };
 
     systemd.timers.application-backup = {

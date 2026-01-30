@@ -3,8 +3,8 @@ set -uo pipefail
 
 S3_BUCKET_NAME="${S3_BUCKET_NAME}"
 S3_ENDPOINT="${S3_ENDPOINT}"
-AWS_ACCESS_KEY_ID="${AWS_ACCESS_KEY_ID}"
-AWS_SECRET_ACCESS_KEY="${AWS_SECRET_ACCESS_KEY}"
+ACCESS_KEY_ID="${ACCESS_KEY_ID}"
+SECRET_ACCESS_KEY="${SECRET_ACCESS_KEY}"
 APPS_DIR="${APPS_DIR:-/home/app-manager/applications}"
 MAX_SIZE_MB=1000
 
@@ -124,8 +124,14 @@ for APP_DIR in "$APPS_DIR"/*; do
 
   ARCHIVE_SIZE=$(du -h "$BACKUP_FILEPATH" | cut -f1)
   log_with_timestamp "$APP_NAME: Uploading $ARCHIVE_SIZE to S3..."
-  if ! aws s3 cp "$BACKUP_FILEPATH" "$S3_TARGET/$APP_NAME/" \
-    --endpoint-url="$S3_ENDPOINT" --quiet 2>/dev/null; then
+
+  if ! s3cmd put "$BACKUP_FILEPATH" "$S3_TARGET/$APP_NAME/" \
+    --host="$S3_ENDPOINT" \
+    --host-bucket="$S3_ENDPOINT" \
+    --access_key="$ACCESS_KEY_ID" \
+    --secret_key="$SECRET_ACCESS_KEY" \
+    --no-mime-magic \
+    --quiet 2>/dev/null; then
     handle_error "$APP_NAME: Failed to upload to S3"
     rm -rf "$TMP_DIR"
     continue
