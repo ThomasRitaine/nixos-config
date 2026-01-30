@@ -14,6 +14,7 @@ let
   orarm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+Y7b+rqdmp99Y6IBnrfs5I9WvAuGbz3pfrsg7A0J+A";
   pharaoh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJL6MIeBTmTbS6rUFPQ0T1QW0E/TFzD9/g3k+fAXCneO";
   koola = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcDHGT++TE1b2puzdsFZ3COtca/NudBDzkAM9mqjfPx";
+  despo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEnqFnRsBHrLBxNz5ijujo58S4BpXkConso1m8nssOsp";
 in
 {
   # --- vps-8karm ---
@@ -35,4 +36,9 @@ in
   "servers/koola/thomas-password.age".publicKeys = admins ++ [ koola ];
   "servers/koola/root-password.age".publicKeys = admins ++ [ koola ];
   "servers/koola/app-manager-password.age".publicKeys = admins ++ [ koola ];
+
+  # --- despo ---
+  "servers/despo/thomas-password.age".publicKeys = admins ++ [ despo ];
+  "servers/despo/root-password.age".publicKeys = admins ++ [ despo ];
+  "servers/despo/app-manager-password.age".publicKeys = admins ++ [ despo ];
 }

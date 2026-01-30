@@ -76,6 +76,7 @@
       orarm = mkOracleHost "orarm";
       pharaoh = mkOracleHost "pharaoh";
       koola = mkOracleHost "koola";
+      despo = mkOracleHost "despo";
     };
 
     homeConfigurations = {
