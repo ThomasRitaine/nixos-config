@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, inputs, ... }:
 
 {
   options = {
@@ -15,18 +15,24 @@
   };
 
   config = {
+    age.secrets = {
+      thomas-password.file = ../../../secrets/servers/${config.hostFlakeName}/thomas-password.age;
+      root-password.file = ../../../secrets/servers/${config.hostFlakeName}/root-password.age;
+      app-manager-password.file = ../../../secrets/servers/${config.hostFlakeName}/app-manager-password.age;
+    };
+
     users.mutableUsers = false;
     users.users = {
       root = {
         isNormalUser = false;
-        hashedPasswordFile = "${config.flakePath}/secrets/root-password";
+        hashedPasswordFile = config.age.secrets.root-password.path;
       };
       thomas = {
         isNormalUser = true;
         description = "Thomas";
         home = "/home/thomas";
         extraGroups = [ "wheel" "docker" ];
-        hashedPasswordFile = "${config.flakePath}/secrets/thomas-password";
+        hashedPasswordFile = config.age.secrets.thomas-password.path;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFDBWxSC0X5OEFoc+DK8ZmWrDERNQwGzUNG8261IedI Personal VPS ssh key for user thomas"
         ];
@@ -36,7 +42,7 @@
         description = "App Manager";
         home = "/home/app-manager";
         extraGroups = [ "docker" ];
-        hashedPasswordFile = "${config.flakePath}/secrets/app-manager-password";
+        hashedPasswordFile = config.age.secrets.app-manager-password.path;
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGhhJyyQRqM+Bq7vBrzwrZIr1hnEbmfrzYXU5kXHIMCm Personal VPS ssh key for user app-manager"
         ];
@@ -74,6 +80,8 @@
         homeBaseConfig
       ];
     in {
+      extraSpecialArgs = { inherit inputs; };
+
       users = {
         root = { pkgs, ... }: { imports = commonImports; };
 

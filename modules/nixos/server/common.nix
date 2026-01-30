@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
+    inputs.agenix.nixosModules.default
     ../fish.nix
     ../docker.nix
     ../garbage-collector.nix

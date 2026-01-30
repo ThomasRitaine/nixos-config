@@ -24,12 +24,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    agenix = {
+      url = "github:ryantm/agenix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hydenix.url = "github:richen604/hydenix";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, disko, nixgl, ... }@inputs:
+  outputs = { self, nixpkgs, disko, nixgl, agenix, ... }@inputs:
     let
       mkOracleHost = hostname: nixpkgs.lib.nixosSystem {
         specialArgs = { inherit inputs; };
