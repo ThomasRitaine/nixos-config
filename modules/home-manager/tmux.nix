@@ -30,6 +30,15 @@
         '';
       }
       {
+        plugin = fingers;
+        extraConfig = ''
+          set -g @fingers-key F
+          set -g @fingers-keyboard-layout 'azerty'
+          set -g @fingers-hint-style 'fg=red,bold'
+          set -g @fingers-highlight-style 'fg=green,bold'
+        '';
+      }
+      {
         plugin = yank;
         extraConfig = ''
           # Enable system clipboard (OSC 52)
@@ -80,6 +89,13 @@
 
       # --- Keybind hints ---
       bind-key y display-popup -w 100% -h 70% -E 'comm -23 <(tmux list-keys | sort) <(tmux -L test -f /dev/null list-keys | sort) | cut -c-"$(tput cols)" | fzf -e -i --prompt="tmux hotkeys: " --info=inline --layout=reverse --scroll-off=5 --tiebreak=index --header "prefix=yes-prefix root=no-prefix" > /dev/null'
+
+      # --- VISUAL MODE CONFIG ---
+      bind v copy-mode
+      unbind [
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
       # --- Custom Keybinds ---
       unbind %
