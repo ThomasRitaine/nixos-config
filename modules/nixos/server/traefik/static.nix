@@ -67,6 +67,10 @@
         moduleName = "github.com/dkijkuit/checkheadersplugin";
         version = "v0.3.1";
       };
+      cloudflarewarp = {
+        moduleName = "github.com/fma965/cloudflarewarp";
+        version = "v1.0.0";
+      };
     };
   };
 }
