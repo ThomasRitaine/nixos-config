@@ -2,6 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
+    ../../modules/nixos/applications-backup/config.nix
+    ../../modules/nixos/traefik
     ./users.nix
   ];
 
