@@ -34,17 +34,14 @@ in
   # --- orarm ---
   "servers/orarm/thomas-password.age".publicKeys = admins ++ [ orarm ];
   "servers/orarm/root-password.age".publicKeys = admins ++ [ orarm ];
-  "servers/orarm/app-manager-password.age".publicKeys = admins ++ [ orarm ];
 
   # --- pharaoh ---
   "servers/pharaoh/thomas-password.age".publicKeys = admins ++ [ pharaoh ];
   "servers/pharaoh/root-password.age".publicKeys = admins ++ [ pharaoh ];
-  "servers/pharaoh/app-manager-password.age".publicKeys = admins ++ [ pharaoh ];
 
   # --- koola ---
   "servers/koola/thomas-password.age".publicKeys = admins ++ [ koola ];
   "servers/koola/root-password.age".publicKeys = admins ++ [ koola ];
-  "servers/koola/app-manager-password.age".publicKeys = admins ++ [ koola ];
 
   # --- despo ---
   "servers/despo/thomas-password.age".publicKeys = admins ++ [ despo ];
