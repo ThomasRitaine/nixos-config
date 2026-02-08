@@ -3,6 +3,7 @@
     ./disk-config.nix
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
+    ../../modules/nixos/foldingathome.nix
     ./users.nix
   ];
 
