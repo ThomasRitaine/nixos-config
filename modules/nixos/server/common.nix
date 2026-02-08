@@ -1,8 +1,6 @@
 { pkgs, inputs, ... }: {
   imports = [
     inputs.agenix.nixosModules.default
-    ../fish.nix
-    ../docker.nix
     ../garbage-collector.nix
     ./firewall.nix
     ./openssh.nix
