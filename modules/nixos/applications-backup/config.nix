@@ -32,7 +32,7 @@ in {
 
   config = lib.mkIf cfg.enable {
     age.secrets.applications-backup-env = {
-      file = ../../../../secrets/servers/${config.hostFlakeName}/applications-backup-env.age;
+      file = ../../../secrets/servers/${config.networking.hostName}/applications-backup-env.age;
       owner = cfg.user;
     };
 
