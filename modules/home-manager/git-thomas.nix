@@ -1,13 +1,26 @@
-{ email ? "thomas.ritaine@example.com", sshSigningKey ? null, }: {
+{
+  email ? "thomas.ritaine@example.com",
+  sshSigningKey ? null,
+}:
+{
   programs.git = {
     enable = true;
-    userName = "Thomas Ritaine";
-    userEmail = "${email}";
+
     signing = {
       key = sshSigningKey;
       format = "ssh";
       signByDefault = true;
     };
-    extraConfig = { init.defaultBranch = "main"; };
+
+    settings = {
+      user = {
+        name = "Thomas Ritaine";
+        email = "${email}";
+      };
+
+      init = {
+        defaultBranch = "main";
+      };
+    };
   };
 }
