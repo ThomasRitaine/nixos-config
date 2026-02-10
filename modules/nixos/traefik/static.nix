@@ -1,9 +1,8 @@
-{ email, dynamicConfigDir }:
+{ email }:
 
 {
   api = {
     dashboard = true;
-    insecure = true;
   };
 
   log = {
@@ -46,7 +45,7 @@
     };
 
     file = {
-      directory = dynamicConfigDir;
+      directory = "/etc/traefik/dynamic";
       watch = true;
     };
   };
