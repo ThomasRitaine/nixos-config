@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/foldingathome.nix
+    ../../modules/nixos/tailscale.nix
     ./users.nix
   ];
 

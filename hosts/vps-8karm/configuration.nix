@@ -4,6 +4,8 @@
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/fish.nix
     ../../modules/nixos/docker.nix
+    ../../modules/nixos/headscale.nix
+    ../../modules/nixos/tailscale.nix
     ../../modules/nixos/applications-backup/config.nix
     ../../modules/nixos/traefik
     ./users.nix
