@@ -35,8 +35,6 @@
     };
   };
 
-  pilot = { dashboard = false; };
-
   providers = {
     docker = {
       endpoint = "unix:///var/run/docker.sock";
