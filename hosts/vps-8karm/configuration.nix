@@ -2,6 +2,8 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
+    ../../modules/nixos/beszel-agent.nix
+    ../../modules/nixos/beszel-hub.nix
     ../../modules/nixos/fish.nix
     ../../modules/nixos/docker.nix
     ../../modules/nixos/headscale.nix

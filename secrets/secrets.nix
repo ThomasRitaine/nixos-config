@@ -50,4 +50,5 @@ in
   # --- Global ---
   "servers/foldingathome-token.age".publicKeys = admins ++ servers;
   "servers/tailscale-token.age".publicKeys = admins ++ servers;
+  "servers/beszel-key-and-token.age".publicKeys = admins ++ servers;
 }
