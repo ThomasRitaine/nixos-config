@@ -9,6 +9,8 @@ let
   pharaoh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJL6MIeBTmTbS6rUFPQ0T1QW0E/TFzD9/g3k+fAXCneO";
   koola = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHcDHGT++TE1b2puzdsFZ3COtca/NudBDzkAM9mqjfPx";
   despo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEnqFnRsBHrLBxNz5ijujo58S4BpXkConso1m8nssOsp";
+  grisou = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO8gn/7FRr6/hDXWhAKUJlcvlwlfOjduYkOmps8qYrE2";
+  sushi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkwDkkMJMNYo/10OpEAydmm9eaqNCo7dmHASLpPtcxD";
 
   # --- Groups ---
   admins = [
@@ -22,6 +24,8 @@ let
     pharaoh
     koola
     despo
+    grisou
+    sushi
   ];
 in
 {
@@ -46,6 +50,14 @@ in
   # --- despo ---
   "servers/despo/thomas-password.age".publicKeys = admins ++ [ despo ];
   "servers/despo/root-password.age".publicKeys = admins ++ [ despo ];
+
+  # --- grisou ---
+  "servers/grisou/thomas-password.age".publicKeys = admins ++ [ grisou ];
+  "servers/grisou/root-password.age".publicKeys = admins ++ [ grisou ];
+
+  # --- sushi ---
+  "servers/sushi/thomas-password.age".publicKeys = admins ++ [ sushi ];
+  "servers/sushi/root-password.age".publicKeys = admins ++ [ sushi ];
 
   # --- Global ---
   "servers/foldingathome-token.age".publicKeys = admins ++ servers;

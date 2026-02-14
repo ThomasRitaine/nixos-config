@@ -77,6 +77,8 @@
       pharaoh = mkOracleHost "pharaoh";
       koola = mkOracleHost "koola";
       despo = mkOracleHost "despo";
+      grisou = mkOracleHost "grisou";
+      sushi = mkOracleHost "sushi";
     };
 
     homeConfigurations = { };
