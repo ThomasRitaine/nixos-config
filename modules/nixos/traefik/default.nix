@@ -20,4 +20,7 @@
   ];
 
   systemd.services.traefik.serviceConfig.SupplementaryGroups = [ "docker" ];
+
+  # Backup
+  services.restic.backups.daily.paths = [ "/var/lib/traefik" ];
 }

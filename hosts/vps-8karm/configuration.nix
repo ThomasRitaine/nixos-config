@@ -7,6 +7,7 @@
     ../../modules/nixos/fish.nix
     ../../modules/nixos/docker.nix
     ../../modules/nixos/headscale.nix
+    ../../modules/nixos/restic.nix
     ../../modules/nixos/tailscale.nix
     ../../modules/nixos/applications-backup/config.nix
     ../../modules/nixos/traefik

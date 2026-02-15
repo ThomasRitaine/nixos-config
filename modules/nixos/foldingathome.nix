@@ -33,4 +33,7 @@
       autoStart = true;
     };
   };
+
+  # Backup
+  services.restic.backups.daily.paths = [ "/var/lib/foldingathome" ];
 }

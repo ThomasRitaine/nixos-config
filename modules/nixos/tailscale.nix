@@ -28,4 +28,7 @@
 
   # Tailscale's MagicDNS requires systemd-resolved on NixOS
   services.resolved.enable = true;
+
+  # Backup
+  services.restic.backups.daily.paths = [ "/var/lib/tailscale" ];
 }

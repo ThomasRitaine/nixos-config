@@ -37,4 +37,7 @@ in
                 - url: "http://127.0.0.1:8080"
     '';
   };
+
+  # Backup
+  services.restic.backups.daily.paths = [ "/var/lib/headscale" ];
 }

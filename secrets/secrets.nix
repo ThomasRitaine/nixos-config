@@ -34,33 +34,42 @@ in
   "servers/vps-8karm/root-password.age".publicKeys = admins ++ [ vps_8karm ];
   "servers/vps-8karm/app-manager-password.age".publicKeys = admins ++ [ vps_8karm ];
   "servers/vps-8karm/applications-backup-env.age".publicKeys = admins ++ [ vps_8karm ];
+  "servers/vps-8karm/restic-password.age".publicKeys = admins ++ [ vps_8karm ];
 
   # --- orarm ---
   "servers/orarm/thomas-password.age".publicKeys = admins ++ [ orarm ];
   "servers/orarm/root-password.age".publicKeys = admins ++ [ orarm ];
+  "servers/orarm/restic-password.age".publicKeys = admins ++ [ orarm ];
 
   # --- pharaoh ---
   "servers/pharaoh/thomas-password.age".publicKeys = admins ++ [ pharaoh ];
   "servers/pharaoh/root-password.age".publicKeys = admins ++ [ pharaoh ];
+  "servers/pharaoh/restic-password.age".publicKeys = admins ++ [ pharaoh ];
 
   # --- koola ---
   "servers/koola/thomas-password.age".publicKeys = admins ++ [ koola ];
   "servers/koola/root-password.age".publicKeys = admins ++ [ koola ];
+  "servers/koola/restic-password.age".publicKeys = admins ++ [ koola ];
 
   # --- despo ---
   "servers/despo/thomas-password.age".publicKeys = admins ++ [ despo ];
   "servers/despo/root-password.age".publicKeys = admins ++ [ despo ];
+  "servers/despo/restic-password.age".publicKeys = admins ++ [ despo ];
 
   # --- grisou ---
   "servers/grisou/thomas-password.age".publicKeys = admins ++ [ grisou ];
   "servers/grisou/root-password.age".publicKeys = admins ++ [ grisou ];
+  "servers/grisou/restic-password.age".publicKeys = admins ++ [ grisou ];
 
   # --- sushi ---
   "servers/sushi/thomas-password.age".publicKeys = admins ++ [ sushi ];
   "servers/sushi/root-password.age".publicKeys = admins ++ [ sushi ];
+  "servers/sushi/restic-password.age".publicKeys = admins ++ [ sushi ];
 
   # --- Global ---
   "servers/foldingathome-token.age".publicKeys = admins ++ servers;
   "servers/tailscale-token.age".publicKeys = admins ++ servers;
   "servers/beszel-key-and-token.age".publicKeys = admins ++ servers;
+  "servers/restic-s3-creds.age".publicKeys = admins ++ servers;
+  "servers/restic-s3-endpoint.age".publicKeys = admins ++ servers;
 }

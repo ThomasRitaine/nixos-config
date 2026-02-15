@@ -5,6 +5,7 @@
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/beszel-agent.nix
     ../../modules/nixos/foldingathome.nix
+    ../../modules/nixos/restic.nix
     ../../modules/nixos/tailscale.nix
     ./users.nix
   ];
