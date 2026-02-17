@@ -18,6 +18,7 @@
       enableAppBackup = true;
     })
     ../../modules/nixos/tailscale.nix
+    ../../modules/nixos/tor.nix
     ../../modules/nixos/traefik
     ./users.nix
   ];
