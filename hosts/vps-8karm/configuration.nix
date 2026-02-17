@@ -1,4 +1,10 @@
-{ ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
@@ -7,9 +13,11 @@
     ../../modules/nixos/fish.nix
     ../../modules/nixos/docker.nix
     ../../modules/nixos/headscale.nix
-    ../../modules/nixos/restic.nix
+    (import ../../modules/nixos/restic {
+      inherit config lib pkgs;
+      enableAppBackup = true;
+    })
     ../../modules/nixos/tailscale.nix
-    ../../modules/nixos/applications-backup/config.nix
     ../../modules/nixos/traefik
     ./users.nix
   ];

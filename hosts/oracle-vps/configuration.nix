@@ -1,11 +1,17 @@
-{ ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./disk-config.nix
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/beszel-agent.nix
     ../../modules/nixos/foldingathome.nix
-    ../../modules/nixos/restic.nix
+    (import ../../modules/nixos/restic { inherit config lib pkgs; })
     ../../modules/nixos/tailscale.nix
     ./users.nix
   ];
