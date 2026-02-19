@@ -2,7 +2,6 @@
 
 <!-- PROJECT SHIELDS -->
 
-[![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -16,12 +15,10 @@
     <img src="docs/images/logo.webp" alt="Logo" width="175" height="175">
   </a>
 
-<h3 align="center">NixOS Configuration</h3>
+<h3 align="center">NixOS Infrastructure & Dotfiles</h3>
 
   <p align="center">
-    A modular NixOS and Home Manager configuration for servers and personal laptop.
-    <br />
-    <a href="https://github.com/ThomasRitaine/nixos-config"><strong>Explore the docs »</strong></a>
+    My personal configuration files for my NixOS global infrastructure and laptop.
     <br />
     <br />
     <a href="https://thomas.ritaine.com/projects">View Demo</a>
@@ -36,323 +33,140 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#about-the-project">About The Project</a>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#architecture">Architecture</a></li>
+    <li><a href="#tree-structure">Tree Structure</a></li>
+    <li><a href="#commands-to-know">Commands to Know</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#remote-server-deployment">Remote Server Deployment</a></li>
+        <li><a href="#local-laptop-deployment">Local Laptop Deployment</a></li>
+        <li><a href="#secrets-management">Secrets Management</a></li>
       </ul>
     </li>
-    <li><a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a>
-      <ul>
-        <li><a href="#applying-configurations">Applying Configurations</a></li>
-        <li><a href="#updating-system">Updating System</a></li>
-      </ul>
-    </li>
-    <li><a href="#repository-structure">Repository Structure</a></li>
-    <li><a href="#key-modules">Key Modules</a></li>
-    <li><a href="#hosts">Hosts</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
-<!-- ABOUT THE PROJECT -->
-
 ## About The Project
 
-[![NixOS Config Screenshot][product-screenshot]](https://thomas.ritaine.com)
+> **Note:** This repository is mainly for me to document what I do. It contains hardcoded paths, personal public keys, and specific hardware configurations. Adapt it to your need before applying.
 
-This repository contains my NixOS configurations for multiple systems:
+What started as a simple server has turned into a multi-node global fleet. I use this to self-host various apps (Jellyfin, Nextcloud, Vaultwarden), provide a Tor bridge, and donate idle CPU cycles to Folding@Home.
 
-- **Declarative Config**: All settings in one place, versioned with Git
-- **Multiple Systems**: Works on both servers and personal laptop
-- **Modular Design**: Reusable components for shell, dev tools, and services
-- **Nix Flakes**: For reproducible builds and easy deployment
-- **Home Manager**: Consistent user environment across systems
+### Info
 
-This setup serves as both my personal configuration and a reference for others interested in NixOS.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-### Built With
-
-This configuration uses these technologies:
-
-- [![NixOS][NixOS-shield]][NixOS-url]
-- [![Home Manager][HomeManager-shield]][HomeManager-url]
-- [![Zsh][Zsh-shield]][Zsh-url]
-- [![Starship][Starship-shield]][Starship-url]
-- [![Neovim][Neovim-shield]][Neovim-url]
-- [![LazyVim][LazyVim-shield]][LazyVim-url]
-- [![Docker][Docker-shield]][Docker-url]
-- [![Kubernetes][K8s-shield]][K8s-url]
-- [![Wezterm][Wezterm-shield]][Wezterm-url]
-- [![Lazygit][Lazygit-shield]][Lazygit-url]
-- [![Zoxide][Zoxide-shield]][Zoxide-url]
+- **Management**: Flakes, Home Manager, Agenix for secrets
+- **Networking**: Traefik reverse proxy, Tailscale mesh, Headscale controller
+- **Backups**: Restic to Backblaze B2 (with pre-backup Docker SQL dumps)
+- **Observability**: Beszel agent on every host and Beszel centralized Hub
+- **Desktop / home-manager**: Hyprland, Kitty, Neovim with LazyVim, Fish shell
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- GETTING STARTED -->
+---
 
-## Getting Started
+## Architecture
 
-### Prerequisites
-
-- **NixOS** or **Nix package manager** with flakes enabled
-- **Git** for cloning the repository
-- **Basic Nix knowledge** for customization
-
-### Installation
-
-1. **Clone the Repository**
-
-   ```sh
-   git clone https://github.com/ThomasRitaine/nixos-config.git
-   cd nixos-config
-   ```
-
-2. **For NixOS Systems**
-
-   ```sh
-   sudo ln -sf $(pwd) /etc/nixos
-   ```
-
-3. **For Non-NixOS Systems** (Any OS that supports Home Manager)
-
-   ```sh
-   mkdir -p ~/.config/home-manager
-   ln -sf $(pwd) ~/.config/home-manager/nixos-config
-   ```
-
-4. **Apply Configuration** following the usage section below
+![Architecture Diagram](docs/images/architecture-diagram.webp)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- USAGE EXAMPLES -->
+---
 
-## Usage
+## Repository Structure
 
-### Applying Configurations
-
-#### For NixOS Systems (VPS)
-
-```sh
-# Test configuration
-sudo nixos-rebuild test --flake .#vps-8karm
-
-# Apply configuration
-sudo nixos-rebuild switch --flake .#vps-8karm
+```text
+.
+├── .github/                  # GitHub-specific files
+│   └── ISSUE_TEMPLATE/       # Templates for GitHub issues
+├── docs/                     # Documentation assets and diagrams
+├── hosts/                    # Host-specific configurations
+│   ├── oracle-vps/           # Shared config for Oracle servers
+│   ├── phoenix86/            # Laptop repurposed to a server at home
+│   ├── vps-8karm/            # Primary server, ARM
+│   └── winix/                # Personal laptop hardware/config
+├── modules/                  # Reusable components
+│   ├── home-manager/         # User dotfiles (neovim, hyprland, git, fish...)
+│   └── nixos/                # System services for servers and laptop
+├── secrets/                  # Agenix encrypted secrets and generation scripts
+│   └── servers/              # Host-specific encrypted .age files
+├── LICENSE                   # MIT license file
+├── README.md                 # Repository documentation
+├── flake.nix                 # Main entry point defining system configurations
+├── flake.lock                # Lock file for reproducible builds
+└── flake.nix                 # Entrypoint for all NixOS configurations
 ```
 
-#### For Remote Deployment
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Example, the koola host, with a configured entry on `~/.ssh/config`:
+---
 
-```sh
+## Commands to Know
+
+I use these commands constantly to deploy and manage the fleet.
+
+### Remote Server Deployment
+
+I push configurations from my local machine to the servers over SSH using NixOS rebuild.
+
+**Deploy the main orchestrator (`vps-8karm`):**
+
+```bash
 nix run nixpkgs#nixos-rebuild -- switch \
-  --flake .#koola \
-  --target-host koola-thomas \
-  --build-host koola-thomas \
+  --flake .#vps-8karm \
+  --target-host 8karm-thomas \
+  --build-host 8karm-thomas \
   --sudo \
   --ask-sudo-password
 ```
 
-#### For Home Manager (Laptop)
+**Deploy an edge node (e.g., `pharaoh`):**
 
-```sh
-# Apply Home Manager configuration
-home-manager switch --flake .#laptop-ec
+```bash
+nix run nixpkgs#nixos-rebuild -- switch \
+  --flake .#pharaoh \
+  --target-host pharaoh-thomas \
+  --build-host pharaoh-thomas \
+  --sudo \
+  --ask-sudo-password
 ```
 
-### Updating System
+*(Alternatively, use the `deploy-server.sh` script to automate updating the fleet).*
 
-The repository includes a convenient update script:
+### Local Laptop Deployment (`winix`)
 
-```sh
-# On NixOS systems
-update         # Apply the configuration
-update -t      # Test the configuration without applying
+To apply the configuration locally:
 
-# On Home Manager systems
-update         # Apply the Home Manager configuration
+```bash
+sudo nixos-rebuild switch --flake .#winix
 ```
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### Secrets Management
 
-<!-- REPOSITORY STRUCTURE -->
+When spinning up a **new host**, I use my custom Fish script to securely hash and encrypt the initial passwords via Agenix. First, source the script, then run it with the target hostname:
 
-## Repository Structure
-
+```bash
+source secrets/create-host-secrets.fish
+create-host-secrets koola
 ```
-.
-├── .github/                  # GitHub-specific files
-│   └── ISSUE_TEMPLATE/       # Templates for GitHub issues
-├── docs/                     # Documentation assets
-├── hosts/                    # Host-specific configurations
-│   ├── laptop-ec/            # Configuration for Ubuntu with Home Manager
-│   ├── vps-8karm/            # ARM-based VPS (primary)
-│   └── vps-orarm/            # ARM-based VPS (secondary)
-├── modules/                  # Reusable configuration modules
-│   ├── home-manager/         # Home Manager modules
-│   │   ├── lazygit/          # LazyGit terminal UI for Git
-│   │   ├── neovim/           # Neovim editor configuration
-│   │   │   ├── config/       # LazyVim config files, symlinked to ~/.config/nvim
-│   │   │   ├── base.nix      # Basic Neovim setup without plugins
-│   │   │   └── lazyvim.nix   # LazyVim distribution integration
-│   │   ├── profiles/         # Common user profiles
-│   │   ├── wezterm/          # Terminal emulator configuration
-│   │   ├── dev-env.nix       # Development environment settings
-│   │   ├── distro-icon.nix   # Linux distro detection icons
-│   │   ├── fzf.nix           # Fuzzy finder configuration
-│   │   ├── git-thomas.nix    # Personal Git configuration
-│   │   ├── kubernetes.nix    # k8s tools configuration
-│   │   ├── starship.nix      # Cross-shell prompt configuration
-│   │   ├── update-flake.nix  # Helper script for updating
-│   │   ├── utils.nix         # Common utilities package list
-│   │   ├── zoxide.nix        # Smart directory navigation
-│   │   └── zsh.nix           # Z-shell configuration and plugins
-│   └── nixos/                # NixOS system modules
-│       ├── vps/              # VPS-specific services
-│       │   ├── applications-backup.nix   # Backup application dir
-│       │   ├── fail2ban.nix  # Brute-force attack prevention
-│       │   ├── firewall.nix  # Network security, port filtering
-│       │   └── openssh.nix   # SSH server configuration
-│       ├── common-vps.nix    # Shared VPS configurations
-│       ├── docker.nix        # Docker container platform
-│       └── zsh.nix           # System-wide Z-shell setup
-├── secrets/                  # Contains hashed passwords on VPS
-    └── .gitignore            # Prevents secrets from being committed
-├── LICENSE                   # MIT license file
-├── README.md                 # Repository documentation
-├── flake.nix                 # Main entry point defining system configurations
-└── flake.lock                # Lock file for reproducible builds
+
+For **editing existing secrets** or adding specific files (like a Restic password for a specific host), I use the standard `agenix` command directly:
+
+```bash
+cd secrets && \
+agenix -e servers/sushi/restic-password.age
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- KEY MODULES -->
-
-## Key Modules
-
-### Development Tools
-
-- **Neovim + LazyVim**: Code editor with IDE features out of the box
-- **LazyGit**: Git terminal UI with conventional commits support
-- **Docker**: Container platform for development and deployment
-- **Kubernetes Tools**: kubectl, k9s, helm, and more for container orchestration
-
-### System Services (VPS Only)
-
-- **OpenSSH**: Remote access with key-based authentication
-- **Fail2Ban**: Protection against brute force attempts
-- **Firewall**: Basic network security
-- **Backup**: Automated application backup
-
-### Shell Environment
-
-- **Zsh**: Shell with autocompletion and syntax highlighting
-- **Starship**: Fast and customizable prompt showing context-aware info
-- **Zoxide**: Smart `cd` command that remembers your most used directories
-- **FZF**: Fuzzy finder for history, files, and more
-
-![A demo of the shell][shell-usage-gif]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- HOSTS -->
-
-## Hosts
-
-The repository manages multiple systems with different configurations:
-
-| Host | Type | OS | Primary Use | Key Features |
-|------|------|--------------|------------|--------------|
-| **vps-8karm** | NixOS | NixOS | Service hosting | Docker, fail2ban, firewall, SSH, app backup |
-| **vps-orarm** | NixOS | NixOS | Service hosting | Same as vps-8karm |
-| **laptop-ec** | Home Manager | Ubuntu | Development | Full dev environment, GUI tools |
-
-**Common Components**: All systems share user environment configuration including:
-
-- Shell setup (Zsh, Starship)
-- Development tools (Neovim, Git)
-- Directory navigation (Zoxide, FZF)
-
-The main difference is that the **VPS hosts** use complete NixOS system configurations including kernel, system services, and networking, while the **laptop** uses only Home Manager to configure the user environment on top of Ubuntu.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ROADMAP -->
-
-## Roadmap
-
-As a personal project, there's no formal roadmap. Some potential improvements:
-
-- [ ] Secret management with agenix
-- [ ] Container-based testing for configurations
-- [ ] System monitoring and health checks
-
-See [open issues](https://github.com/ThomasRitaine/nixos-config/issues) for more ideas.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- CONTRIBUTING -->
-
-## Contributing
-
-While this is primarily a personal configuration, contributions are welcome.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- LICENSE -->
+---
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+This code is registered under the MIT License. Do what you would like with it, and I hope this inspires you for your own configurations as many others have inspired me. Star if it helped !
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- CONTACT -->
-
-## Contact
-
-Thomas Ritaine - <thomas@ritaine.com> - [LinkedIn](https://linkedin.com/in/thomas-ritaine)
-
-Project Link: [https://github.com/ThomasRitaine/nixos-config](https://github.com/ThomasRitaine/nixos-config)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- ACKNOWLEDGMENTS -->
-
-## Acknowledgments
-
-- [NixOS](https://nixos.org/) - The purely functional Linux distribution
-- [Home Manager](https://github.com/nix-community/home-manager) - User environment management
-- [Nix Flakes](https://nixos.wiki/wiki/Flakes) - Reproducible builds and dependencies
-- [LazyVim](https://github.com/LazyVim/LazyVim) - Neovim distribution with sane defaults
-- [Zsh](https://www.zsh.org/) - Extended shell with many improvements
-- [Starship](https://starship.rs/) - Cross-shell prompt
-- [Wezterm](https://wezfurlong.org/wezterm/) - Terminal emulator
-- [Docker](https://www.docker.com/) - Container platform
-- [Kubernetes](https://kubernetes.io/) - Container orchestration
-- [Lazygit](https://github.com/jesseduffield/lazygit) - Terminal UI for Git
-- [Zoxide](https://github.com/ajeetdsouza/zoxide) - Smarter cd command
-- [FZF](https://github.com/junegunn/fzf) - Command-line fuzzy finder
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/ThomasRitaine/nixos-config.svg?style=for-the-badge
-[contributors-url]: https://github.com/ThomasRitaine/nixos-config/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/ThomasRitaine/nixos-config.svg?style=for-the-badge
 [forks-url]: https://github.com/ThomasRitaine/nixos-config/network/members
 [stars-shield]: https://img.shields.io/github/stars/ThomasRitaine/nixos-config.svg?style=for-the-badge
@@ -363,27 +177,3 @@ Project Link: [https://github.com/ThomasRitaine/nixos-config](https://github.com
 [license-url]: https://github.com/ThomasRitaine/nixos-config/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/thomas-ritaine
-[product-screenshot]: docs/images/screenshot.webp
-[NixOS-shield]: https://img.shields.io/badge/NixOS-5277C3?style=for-the-badge&logo=nixos&logoColor=white
-[NixOS-url]: https://nixos.org/
-[HomeManager-shield]: https://img.shields.io/badge/Home_Manager-5277C3?style=for-the-badge&logo=nixos&logoColor=white
-[HomeManager-url]: https://github.com/nix-community/home-manager
-[Neovim-shield]: https://img.shields.io/badge/Neovim-57A143?style=for-the-badge&logo=neovim&logoColor=white
-[Neovim-url]: https://neovim.io/
-[LazyVim-shield]: https://img.shields.io/badge/LazyVim-8C61FF?style=for-the-badge&logo=neovim&logoColor=white
-[LazyVim-url]: https://www.lazyvim.org/
-[Zsh-shield]: https://img.shields.io/badge/Zsh-F15A24?style=for-the-badge&logo=zsh&logoColor=white
-[Zsh-url]: https://www.zsh.org/
-[Starship-shield]: https://img.shields.io/badge/Starship-DD0B78?style=for-the-badge&logo=starship&logoColor=white
-[Starship-url]: https://starship.rs/
-[Docker-shield]: https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
-[Docker-url]: https://www.docker.com/
-[K8s-shield]: https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white
-[K8s-url]: https://kubernetes.io/
-[Wezterm-shield]: https://img.shields.io/badge/WezTerm-4E49EE?logo=wezterm&logoColor=fff&style=for-the-badge
-[Wezterm-url]: https://wezfurlong.org/wezterm/
-[Lazygit-shield]: https://img.shields.io/badge/Lazygit-F05032?style=for-the-badge&logo=git&logoColor=white
-[Lazygit-url]: https://github.com/jesseduffield/lazygit
-[Zoxide-shield]: https://img.shields.io/badge/Zoxide-777777?style=for-the-badge&logo=files&logoColor=white
-[Zoxide-url]: https://github.com/ajeetdsouza/zoxide
-[shell-usage-gif]: docs/images/shell-usage.gif
