@@ -79,6 +79,7 @@
       despo = mkOracleHost "despo";
       grisou = mkOracleHost "grisou";
       sushi = mkOracleHost "sushi";
+      mc-estou = mkOracleHost "mc-estou";
     };
 
     homeConfigurations = { };

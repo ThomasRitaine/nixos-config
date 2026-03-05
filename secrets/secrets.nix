@@ -11,6 +11,7 @@ let
   despo = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEnqFnRsBHrLBxNz5ijujo58S4BpXkConso1m8nssOsp";
   grisou = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO8gn/7FRr6/hDXWhAKUJlcvlwlfOjduYkOmps8qYrE2";
   sushi = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMkwDkkMJMNYo/10OpEAydmm9eaqNCo7dmHASLpPtcxD";
+  mc-estou = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOni/6GK4fV8rGqCVLcF21x4IT6afHNtXgFzPOYI5sS";
 
   # --- Groups ---
   admins = [
@@ -26,6 +27,7 @@ let
     despo
     grisou
     sushi
+    mc-estou
   ];
 in
 {
@@ -65,6 +67,11 @@ in
   "servers/sushi/thomas-password.age".publicKeys = admins ++ [ sushi ];
   "servers/sushi/root-password.age".publicKeys = admins ++ [ sushi ];
   "servers/sushi/restic-password.age".publicKeys = admins ++ [ sushi ];
+
+  # --- mc-estou ---
+  "servers/mc-estou/thomas-password.age".publicKeys = admins ++ [ mc-estou ];
+  "servers/mc-estou/root-password.age".publicKeys = admins ++ [ mc-estou ];
+  "servers/mc-estou/restic-password.age".publicKeys = admins ++ [ mc-estou ];
 
   # --- Global ---
   "servers/foldingathome-token.age".publicKeys = admins ++ servers;
