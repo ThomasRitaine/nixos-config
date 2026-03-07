@@ -107,7 +107,7 @@ I use these commands constantly to deploy and manage the fleet.
 
 ### Remote Server Deployment
 
-I push configurations from my local machine to the servers over SSH using NixOS rebuild.
+I push configurations from my local machine to the servers over SSH.
 
 **Deploy the main orchestrator (`vps-8karm`):**
 
@@ -120,18 +120,19 @@ nix run nixpkgs#nixos-rebuild -- switch \
   --ask-sudo-password
 ```
 
-**Deploy an edge node (e.g., `pharaoh`):**
+**Deploy to the Oracle server fleet (via Colmena):**
+
+To apply configurations to all Colmena-managed servers at once:
 
 ```bash
-nix run nixpkgs#nixos-rebuild -- switch \
-  --flake .#pharaoh \
-  --target-host pharaoh-thomas \
-  --build-host pharaoh-thomas \
-  --sudo \
-  --ask-sudo-password
+nix run github:zhaofengli/colmena -- apply
 ```
 
-*(Alternatively, use the `deploy-server.sh` script to automate updating the fleet).*
+To apply to a single server (e.g., `depo`):
+
+```bash
+nix run github:zhaofengli/colmena -- apply --on depo
+```
 
 ### Local Laptop Deployment (`winix`)
 

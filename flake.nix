@@ -29,16 +29,31 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    colmena.url = "github:zhaofengli/colmena";
+
     hydenix.url = "github:richen604/hydenix";
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
   };
 
-  outputs = { self, nixpkgs, disko, nixgl, agenix, ... }@inputs:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      disko,
+      nixgl,
+      agenix,
+      colmena,
+      ...
+    }@inputs:
     let
-      mkOracleHost = hostname: nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
+      mkOracleHost = hostname: {
+        deployment = {
+          targetHost = "${hostname}-thomas";
+          targetUser = null;
+          buildOnTarget = true;
+        };
+        imports = [
           ./hosts/oracle-vps/configuration.nix
           disko.nixosModules.disko
           inputs.home-manager.nixosModules.default
@@ -51,38 +66,49 @@
       };
     in
     {
-    nixosConfigurations = {
-      vps-8karm = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/vps-8karm/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
+      nixosConfigurations = {
+        vps-8karm = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/vps-8karm/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
+        phoenix86 = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/phoenix86/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
+        winix = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/winix/configuration.nix
+          ];
+        };
       };
-      phoenix86 = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/phoenix86/configuration.nix
-          inputs.home-manager.nixosModules.default
-        ];
-      };
-      winix = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          ./hosts/winix/configuration.nix
-        ];
-      };
-      # Oracle instances
-      orarm = mkOracleHost "orarm";
-      pharaoh = mkOracleHost "pharaoh";
-      koola = mkOracleHost "koola";
-      despo = mkOracleHost "despo";
-      grisou = mkOracleHost "grisou";
-      sushi = mkOracleHost "sushi";
-      mc-estou = mkOracleHost "mc-estou";
-      agouz = mkOracleHost "agouz";
-    };
 
-    homeConfigurations = { };
-  };
+      homeConfigurations = { };
+
+      colmenaHive = colmena.lib.makeHive self.outputs.colmena;
+      colmena = {
+        meta = {
+          nixpkgs = import nixpkgs {
+            system = "aarch64-linux";
+            overlays = [ ];
+          };
+          specialArgs = { inherit inputs; };
+        };
+        # Oracle instances
+        orarm = mkOracleHost "orarm";
+        pharaoh = mkOracleHost "pharaoh";
+        koola = mkOracleHost "koola";
+        despo = mkOracleHost "despo";
+        grisou = mkOracleHost "grisou";
+        sushi = mkOracleHost "sushi";
+        mc-estou = mkOracleHost "mc-estou";
+        agouz = mkOracleHost "agouz";
+      };
+    };
 }
