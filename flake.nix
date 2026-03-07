@@ -80,6 +80,7 @@
       grisou = mkOracleHost "grisou";
       sushi = mkOracleHost "sushi";
       mc-estou = mkOracleHost "mc-estou";
+      agouz = mkOracleHost "agouz";
     };
 
     homeConfigurations = { };
