@@ -86,4 +86,6 @@ in
   "servers/beszel-key-and-token.age".publicKeys = admins ++ servers;
   "servers/restic-s3-creds.age".publicKeys = admins ++ servers;
   "servers/restic-s3-endpoint.age".publicKeys = admins ++ servers;
+  "servers/garage-rpc-secret.age".publicKeys = admins ++ servers;
+  "servers/garage-bootstrap-peers.age".publicKeys = admins ++ servers;
 }

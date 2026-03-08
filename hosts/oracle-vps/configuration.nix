@@ -12,6 +12,7 @@
     ../../modules/nixos/beszel-agent.nix
     ../../modules/nixos/foldingathome.nix
     (import ../../modules/nixos/restic { inherit config lib pkgs; })
+    (import ../../modules/nixos/garage.nix { })
     ../../modules/nixos/tailscale.nix
     ./users.nix
   ];

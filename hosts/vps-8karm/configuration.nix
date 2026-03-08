@@ -12,6 +12,7 @@
     ../../modules/nixos/beszel-hub.nix
     ../../modules/nixos/fish.nix
     ../../modules/nixos/docker.nix
+    (import ../../modules/nixos/garage.nix { traefikEnable = true; })
     ../../modules/nixos/headscale.nix
     (import ../../modules/nixos/restic {
       inherit config lib pkgs;
