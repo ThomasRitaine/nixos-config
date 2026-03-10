@@ -109,6 +109,7 @@
         sushi = mkOracleHost "sushi";
         mc-estou = mkOracleHost "mc-estou";
         agouz = mkOracleHost "agouz";
+        picsou = mkOracleHost "picsou";
       };
     };
 }
