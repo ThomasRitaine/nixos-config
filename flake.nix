@@ -47,7 +47,19 @@
       ...
     }@inputs:
     let
-      mkOracleHost = hostname: {
+      oracleHosts = [
+        "orarm"
+        "pharaoh"
+        "koola"
+        "despo"
+        "grisou"
+        "sushi"
+        "mc-estou"
+        "agouz"
+        "picsou"
+      ];
+
+      oracleColmenaNodes = nixpkgs.lib.genAttrs oracleHosts (hostname: {
         deployment = {
           targetHost = "${hostname}-thomas";
           targetUser = null;
@@ -63,12 +75,12 @@
             home-manager.extraSpecialArgs = { inherit inputs; };
           }
         ];
-      };
+      });
     in
     {
       nixosConfigurations = {
         vps-8karm = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs oracleHosts; };
           modules = [
             ./hosts/vps-8karm/configuration.nix
             inputs.home-manager.nixosModules.default
@@ -100,16 +112,7 @@
           };
           specialArgs = { inherit inputs; };
         };
-        # Oracle instances
-        orarm = mkOracleHost "orarm";
-        pharaoh = mkOracleHost "pharaoh";
-        koola = mkOracleHost "koola";
-        despo = mkOracleHost "despo";
-        grisou = mkOracleHost "grisou";
-        sushi = mkOracleHost "sushi";
-        mc-estou = mkOracleHost "mc-estou";
-        agouz = mkOracleHost "agouz";
-        picsou = mkOracleHost "picsou";
-      };
+      }
+      // oracleColmenaNodes;
     };
 }
