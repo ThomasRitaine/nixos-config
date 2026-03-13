@@ -33,6 +33,19 @@
         tls = { certResolver = "letsencrypt"; };
       };
     };
+
+    metrics = {
+      address = "127.0.0.1:8082";
+    };
+  };
+
+  metrics = {
+    prometheus = {
+      addEntryPointsLabels = true;
+      addRoutersLabels = true;
+      addServicesLabels = true;
+      entryPoint = "metrics";
+    };
   };
 
   providers = {

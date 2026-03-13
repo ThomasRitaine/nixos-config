@@ -19,6 +19,14 @@ in
 
     scrapeConfigs = [
       {
+        job_name = "traefik";
+        static_configs = [
+          {
+            targets = [ "127.0.0.1:8082" ];
+          }
+        ];
+      }
+      {
         job_name = "garage";
         bearer_token_file = "/run/credentials/prometheus.service/garage-token";
         static_configs = [
