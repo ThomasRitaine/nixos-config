@@ -13,6 +13,28 @@
     restic-password.file = ../../../secrets/servers/${config.networking.hostName}/restic-password.age;
   };
 
+  services.prometheus.exporters.restic = {
+    enable = true;
+    passwordFile = config.age.secrets.restic-password.path;
+    environmentFile = config.age.secrets.restic-s3-creds.path;
+    repository = "overridden-by-script";
+    refreshInterval = 7200; # Every 2 hours
+  };
+
+  systemd.services.prometheus-restic-exporter = {
+    serviceConfig.LoadCredential = [
+      "RESTIC_ENDPOINT:${config.age.secrets.restic-s3-endpoint.path}"
+    ];
+
+    script = lib.mkForce ''
+      BASE_URL=$(cat $CREDENTIALS_DIRECTORY/RESTIC_ENDPOINT | xargs)
+      export RESTIC_REPOSITORY="s3:''${BASE_URL}/${config.networking.hostName}"
+      export RESTIC_PASSWORD_FILE=$CREDENTIALS_DIRECTORY/RESTIC_PASSWORD_FILE
+
+      exec ${pkgs.prometheus-restic-exporter}/bin/restic-exporter.py
+    '';
+  };
+
   services.restic.backups.daily = {
     initialize = true;
 
