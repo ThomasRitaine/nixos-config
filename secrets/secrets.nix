@@ -20,6 +20,7 @@ let
     mc-estou = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBOni/6GK4fV8rGqCVLcF21x4IT6afHNtXgFzPOYI5sS";
     agouz = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL75fRY3zU/n2jHC83PDZw2V3UMr70BZZmsnsg1DPqxR";
     picsou = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwk4r75LYPuFd50nxijOyrwuN6gDjfQqHhrfig89Nq8";
+    joburg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7daP2Mkqejm5YDiQOkY7hjwOA3Db/NDUgIkNFd0CKv";
   };
 
   servers = [ vps-8karm ] ++ (builtins.attrValues oracleHosts);
