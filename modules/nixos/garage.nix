@@ -21,6 +21,12 @@
     group = "garage";
   };
 
+  age.secrets.garage-metrics-token = {
+    file = ../../secrets/servers/garage-metrics-token.age;
+    owner = "garage";
+    group = "garage";
+  };
+
   users.users.garage = {
     isSystemUser = true;
     group = "garage";
@@ -63,9 +69,12 @@
       # Admin API
       admin = {
         api_bind_addr = "[::]:3903";
-        metrics_require_token = true;
       };
     };
+  };
+
+  systemd.services.garage.environment = {
+    GARAGE_METRICS_TOKEN_FILE = config.age.secrets.garage-metrics-token.path;
   };
 
   systemd.services.garage.serviceConfig = {
@@ -106,9 +115,12 @@
     '';
   };
 
-  # Only open RPC (Internal Sync) port
+  # Open RPC and Admin ports.
   # API ports are accessed via Traefik (localhost) or Tailscale (internal)
-  networking.firewall.allowedTCPPorts = [ 3901 ];
+  networking.firewall.allowedTCPPorts = [
+    3901
+    3903
+  ];
 
   # Traefik exposing
   environment.etc."traefik/dynamic/garage.yml" = lib.mkIf traefikEnable {
