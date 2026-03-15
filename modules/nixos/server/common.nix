@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }: {
   imports = [
     inputs.agenix.nixosModules.default
+    ../monitoring/exporters/geo.nix
     ../garbage-collector.nix
     ./firewall.nix
     ./openssh.nix

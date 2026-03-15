@@ -7,6 +7,7 @@
 let
   garageTargets = builtins.map (host: "${host}.internal:3903") oracleHosts;
   resticTargets = builtins.map (host: "${host}.internal:9753") oracleHosts;
+  nodeTargets = builtins.map (host: "${host}.internal:9100") oracleHosts;
 in
 {
   systemd.services.prometheus.serviceConfig.LoadCredential = [
@@ -41,6 +42,14 @@ in
         static_configs = [
           {
             targets = [ "${config.networking.hostName}.internal:9753" ] ++ resticTargets;
+          }
+        ];
+      }
+      {
+        job_name = "node_exporter";
+        static_configs = [
+          {
+            targets = [ "${config.networking.hostName}.internal:9100" ] ++ nodeTargets;
           }
         ];
       }

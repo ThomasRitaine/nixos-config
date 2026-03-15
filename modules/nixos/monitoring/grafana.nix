@@ -2,6 +2,8 @@
 
 let
   domain = "grafana.thomas.ritaine.com";
+  serversDomain = "servers.thomas.ritaine.com";
+  serversPublicDashboardUid = "51f620a731704f52bb48d17680def9be";
 in
 {
   services.grafana = {
@@ -20,8 +22,9 @@ in
 
       datasources.settings.datasources = [
         {
-          name = "Prometheus";
+          name = "Prometheus Data";
           type = "prometheus";
+          uid = "prometheus-ds-primary";
           access = "proxy";
           url = "http://127.0.0.1:${toString config.services.prometheus.port}";
           isDefault = true;
@@ -52,9 +55,21 @@ in
     // {
       "traefik/dynamic/grafana.yml".text = ''
         http:
+          middlewares:
+            grafana-redirect-server-map-dashboard:
+              redirectRegex:
+                regex: "^https?://${serversDomain}/.*"
+                replacement: "https://${domain}/public-dashboards/${serversPublicDashboardUid}"
+
           routers:
             grafana:
               rule: "Host(`${domain}`)"
+              service: "grafana"
+
+            grafana-redirect-server-map-dashboard:
+              rule: "Host(`${serversDomain}`)"
+              middlewares:
+                - grafana-redirect-server-map-dashboard
               service: "grafana"
 
           services:
