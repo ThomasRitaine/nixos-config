@@ -58,6 +58,7 @@
         "agouz"
         "picsou"
         "joburg"
+        "slayyy"
       ];
 
       oracleColmenaNodes = nixpkgs.lib.genAttrs oracleHosts (hostname: {

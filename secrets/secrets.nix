@@ -21,6 +21,7 @@ let
     agouz = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIL75fRY3zU/n2jHC83PDZw2V3UMr70BZZmsnsg1DPqxR";
     picsou = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHwk4r75LYPuFd50nxijOyrwuN6gDjfQqHhrfig89Nq8";
     joburg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7daP2Mkqejm5YDiQOkY7hjwOA3Db/NDUgIkNFd0CKv";
+    slayyy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0ygKqvWRK0svpxruY+eiQawz/rC6cPVRBu2iTWB86A";
   };
 
   servers = [ vps-8karm ] ++ (builtins.attrValues oracleHosts);
