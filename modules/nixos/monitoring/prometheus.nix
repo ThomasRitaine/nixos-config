@@ -1,13 +1,17 @@
 {
   config,
+  lib,
   oracleHosts ? [ ],
   ...
 }:
 
 let
-  garageTargets = builtins.map (host: "${host}.internal:3903") oracleHosts;
-  resticTargets = builtins.map (host: "${host}.internal:9753") oracleHosts;
-  nodeTargets = builtins.map (host: "${host}.internal:9100") oracleHosts;
+  additionalHosts = [ ];
+  allHosts = lib.unique ([ config.networking.hostName ] ++ additionalHosts ++ oracleHosts);
+
+  garageTargets = builtins.map (host: "${host}.internal:3903") allHosts;
+  resticTargets = builtins.map (host: "${host}.internal:9753") allHosts;
+  nodeTargets = builtins.map (host: "${host}.internal:9100") allHosts;
 in
 {
   systemd.services.prometheus.serviceConfig.LoadCredential = [
@@ -33,7 +37,7 @@ in
         bearer_token_file = "/run/credentials/prometheus.service/garage-token";
         static_configs = [
           {
-            targets = [ "${config.networking.hostName}.internal:3903" ] ++ garageTargets;
+            targets = garageTargets;
           }
         ];
       }
@@ -41,7 +45,7 @@ in
         job_name = "restic";
         static_configs = [
           {
-            targets = [ "${config.networking.hostName}.internal:9753" ] ++ resticTargets;
+            targets = resticTargets;
           }
         ];
       }
@@ -49,7 +53,7 @@ in
         job_name = "node_exporter";
         static_configs = [
           {
-            targets = [ "${config.networking.hostName}.internal:9100" ] ++ nodeTargets;
+            targets = nodeTargets;
           }
         ];
       }
