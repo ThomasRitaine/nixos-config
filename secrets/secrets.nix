@@ -10,6 +10,7 @@ let
 
   # --- Hosts keys ---
   vps-8karm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+uyYaOKnjmKqZ8Mi+eYgfEsLi7wYnxcHi7z6xb4b1z";
+  phoenix86 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIS+yO1Hkid/PDkYibhe1TtCVL11MzQkMIaP9ThpeDzK";
   oracleHosts = {
     orarm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+Y7b+rqdmp99Y6IBnrfs5I9WvAuGbz3pfrsg7A0J+A";
     pharaoh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJL6MIeBTmTbS6rUFPQ0T1QW0E/TFzD9/g3k+fAXCneO";
@@ -24,7 +25,11 @@ let
     slayyy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0ygKqvWRK0svpxruY+eiQawz/rC6cPVRBu2iTWB86A";
   };
 
-  servers = [ vps-8karm ] ++ (builtins.attrValues oracleHosts);
+  servers = [
+    vps-8karm
+    phoenix86
+  ]
+  ++ (builtins.attrValues oracleHosts);
 
   mkOracleSecrets = hostname: key: {
     "servers/${hostname}/thomas-password.age".publicKeys = admins ++ [ key ];
@@ -43,6 +48,15 @@ in
   "servers/vps-8karm/root-password.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/app-manager-password.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/restic-password.age".publicKeys = admins ++ [ vps-8karm ];
+
+  # phoenix86
+  "servers/phoenix86/thomas-password.age".publicKeys = admins ++ [ phoenix86 ];
+  "servers/phoenix86/root-password.age".publicKeys = admins ++ [ phoenix86 ];
+  "servers/phoenix86/tissou-password.age".publicKeys = admins ++ [ phoenix86 ];
+  "servers/phoenix86/restic-password.age".publicKeys = admins ++ [ phoenix86 ];
+  "servers/phoenix86/cloudflare-origin-cert.age".publicKeys = admins ++ [ phoenix86 ];
+  "servers/phoenix86/cloudflare-origin-cert-key.age".publicKeys = admins ++ [ phoenix86 ];
+  "servers/phoenix86/cloudflared-tunnel-config.age".publicKeys = admins ++ [ phoenix86 ];
 
   # Global
   "servers/foldingathome-token.age".publicKeys = admins ++ servers;

@@ -14,7 +14,6 @@
     isNormalUser = true;
     description = "TISSOU";
     extraGroups = [ "networkmanager" "video" "audio" ];
-    initialPassword = "";
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGhhJyyQRqM+Bq7vBrzwrZIr1hnEbmfrzYXU5kXHIMCm app-manager"
     ];

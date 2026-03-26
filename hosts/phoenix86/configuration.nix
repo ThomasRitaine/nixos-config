@@ -1,10 +1,21 @@
-{ ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     ./hardware-configuration.nix
     ./remote-desktop.nix
     ./users.nix
+    ./nginx.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/cloudflared.nix
+    ../../modules/nixos/beszel-agent.nix
+    ../../modules/nixos/tailscale.nix
+    (import ../../modules/nixos/garage.nix { })
+    (import ../../modules/nixos/restic { inherit config lib pkgs; })
   ];
 
   system.stateVersion = "24.11";
