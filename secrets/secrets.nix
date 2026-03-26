@@ -42,7 +42,6 @@ in
   "servers/vps-8karm/thomas-password.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/root-password.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/app-manager-password.age".publicKeys = admins ++ [ vps-8karm ];
-  "servers/vps-8karm/applications-backup-env.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/restic-password.age".publicKeys = admins ++ [ vps-8karm ];
 
   # Global
