@@ -79,6 +79,7 @@
     ++ lib.optional enableAppBackup "--files-from /run/restic/dynamic_paths.txt";
 
     pruneOpts = [
+      "--group-by host"
       "--keep-daily 7"
       "--keep-weekly 4"
       "--keep-monthly 6"
