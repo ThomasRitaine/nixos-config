@@ -31,6 +31,10 @@
       export RESTIC_REPOSITORY="s3:''${BASE_URL}/${config.networking.hostName}"
       export RESTIC_PASSWORD_FILE=$CREDENTIALS_DIRECTORY/RESTIC_PASSWORD_FILE
 
+      if ! ${pkgs.restic}/bin/restic snapshots >/dev/null 2>&1; then
+        ${pkgs.restic}/bin/restic init
+      fi
+
       exec ${pkgs.prometheus-restic-exporter}/bin/restic-exporter.py
     '';
   };
