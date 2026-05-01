@@ -24,6 +24,7 @@ let
     joburg = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB7daP2Mkqejm5YDiQOkY7hjwOA3Db/NDUgIkNFd0CKv";
     slayyy = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA0ygKqvWRK0svpxruY+eiQawz/rC6cPVRBu2iTWB86A";
     tik-tac = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILjBcTw2mBwcnJ3THBK/WK3wGVX9/4DiAVutvsyhZaFE";
+    sembat = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHyu2K6Vf1KzhYjUqWzvzQMcY4nXAWfv+O82oMs7orKw";
   };
 
   servers = [

@@ -60,6 +60,7 @@
         "joburg"
         "slayyy"
         "tik-tac"
+        "sembat"
       ];
 
       oracleColmenaNodes = nixpkgs.lib.genAttrs oracleHosts (hostname: {
