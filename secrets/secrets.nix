@@ -50,6 +50,7 @@ in
   "servers/vps-8karm/root-password.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/app-manager-password.age".publicKeys = admins ++ [ vps-8karm ];
   "servers/vps-8karm/restic-password.age".publicKeys = admins ++ [ vps-8karm ];
+  "servers/vps-8karm/grafana-secret-key.age".publicKeys = admins ++ [ vps-8karm ];
 
   # phoenix86
   "servers/phoenix86/thomas-password.age".publicKeys = admins ++ [ phoenix86 ];

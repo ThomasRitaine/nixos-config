@@ -15,5 +15,8 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console.keyMap = "fr";
 
+  # Prevent copy fail exploit
+  boot.blacklistedKernelModules = [ "algif_aead" ];
+
   environment.systemPackages = with pkgs; [ git ];
 }

@@ -6,9 +6,17 @@ let
   serversPublicDashboardUid = "51f620a731704f52bb48d17680def9be";
 in
 {
+  age.secrets.grafana-secret-key = {
+    file = ../../../secrets/servers/vps-8karm/grafana-secret-key.age;
+    owner = "grafana";
+  };
+
   services.grafana = {
     enable = true;
     settings = {
+      security = {
+        secret_key = "$__file{${config.age.secrets.grafana-secret-key.path}}";
+      };
       server = {
         http_addr = "127.0.0.1";
         http_port = 3000;
