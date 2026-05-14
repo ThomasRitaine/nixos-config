@@ -61,6 +61,10 @@ in
   "servers/phoenix86/cloudflare-origin-cert-key.age".publicKeys = admins ++ [ phoenix86 ];
   "servers/phoenix86/cloudflared-tunnel-config.age".publicKeys = admins ++ [ phoenix86 ];
 
+  # rsync.net
+  "servers/rsyncnet-ssh-key.age".publicKeys = admins ++ [ oracleHosts.orarm ];
+  "servers/rsyncnet-user.age".publicKeys = admins ++ [ oracleHosts.orarm ];
+
   # Global
   "servers/foldingathome-token.age".publicKeys = admins ++ servers;
   "servers/tailscale-token.age".publicKeys = admins ++ servers;
