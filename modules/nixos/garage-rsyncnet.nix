@@ -17,6 +17,7 @@ lib.mkIf (config.networking.hostName == "orarm") {
   };
 
   services.garage.settings.data_dir = lib.mkForce "/mnt/garage-rsyncnet-data";
+  garageAutoCapacity = "1T";
 
   environment.systemPackages = [
     pkgs.rclone

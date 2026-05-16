@@ -25,6 +25,8 @@
     ./users.nix
   ];
 
+  garageAutoCapacity = "1.2T";
+
   system.stateVersion = "24.05";
 
   boot.loader.systemd-boot.enable = true;
