@@ -2,6 +2,14 @@
 {
   environment.systemPackages = with pkgs; [ cloudflared ];
 
+  users = {
+    users.cloudflared = {
+      isSystemUser = true;
+      group = "cloudflared";
+    };
+    groups.cloudflared = { };
+  };
+
   age.secrets."cloudflared-tunnel-config" = {
     file = ../../secrets/servers/phoenix86/cloudflared-tunnel-config.age;
     owner = "cloudflared";
