@@ -21,6 +21,8 @@
 
   systemd.services.traefik.serviceConfig.SupplementaryGroups = [ "docker" ];
 
+  imports = [ ./error-pages.nix ];
+
   # Backup
   services.restic.backups.daily.paths = [ "/var/lib/traefik" ];
 }

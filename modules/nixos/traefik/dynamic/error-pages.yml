@@ -1,0 +1,23 @@
+http:
+  routers:
+    error-pages-router:
+      rule: "HostRegexp(`.+`)"
+      priority: 10
+      middlewares:
+        - "error-pages"
+      service: "error-pages"
+      entryPoints:
+        - "websecure"
+
+  middlewares:
+    error-pages:
+      errors:
+        status: "400-599"
+        service: "error-pages"
+        query: "/{status}.html"
+
+  services:
+    error-pages:
+      loadBalancer:
+        servers:
+          - url: "http://127.0.0.1:8085"

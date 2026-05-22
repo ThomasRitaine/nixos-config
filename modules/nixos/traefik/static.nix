@@ -29,7 +29,11 @@
       address = ":443";
       asDefault = true;
       http = {
-        middlewares = [ "nofloc@file" "secureHeaders@file" ];
+        middlewares = [
+          "nofloc@file"
+          "secureHeaders@file"
+          "error-pages@file"
+        ];
         tls = { certResolver = "letsencrypt"; };
       };
     };
