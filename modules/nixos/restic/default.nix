@@ -53,6 +53,10 @@
     exclude = lib.mkIf enableAppBackup [
       "*.tar.gz"
       ".git"
+      "logs"
+      "cache"
+      ".cache"
+      "*.jar"
     ];
 
     backupPrepareCommand = lib.mkBefore ''
