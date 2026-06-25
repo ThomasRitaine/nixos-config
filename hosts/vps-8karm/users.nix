@@ -69,7 +69,7 @@
         };
 
         "app-manager" = { pkgs, ... }: {
-          imports = commonImports;
+          imports = commonImports ++ [ ../../modules/home-manager/python.nix ];
         };
       };
     };
