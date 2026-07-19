@@ -6,7 +6,10 @@
 }:
 
 let
-  additionalHosts = [ "phoenix86" ];
+  additionalHosts = [
+    "phoenix86"
+    "antoinette"
+  ];
   allHosts = lib.unique ([ config.networking.hostName ] ++ additionalHosts ++ oracleHosts);
 
   garageTargets = builtins.map (host: "${host}.internal:3903") allHosts;

@@ -98,6 +98,13 @@
             inputs.home-manager.nixosModules.default
           ];
         };
+        antoinette = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/antoinette/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
         winix = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
