@@ -1,9 +1,20 @@
-{ config, ... }:
+{
+  isHeadscaleServer ? false,
+  bypassHeadscaleDns ? isHeadscaleServer,
+  useStaticFallbackDns ? isHeadscaleServer,
+  tags ? [ "tag:server" ],
+}:
+{ config, lib, ... }:
 
 {
   age.secrets.tailscale-token = {
     file = ../../secrets/servers/tailscale-token.age;
   };
+
+  networking.nameservers = lib.mkIf useStaticFallbackDns [
+    "1.1.1.1"
+    "8.8.8.8"
+  ];
 
   services.tailscale = {
     enable = true;
@@ -13,8 +24,11 @@
     extraUpFlags = [
       "--login-server=https://vpn.thomas.ritaine.com"
       "--advertise-exit-node"
-      "--accept-routes" # Accept routes advertised by other nodes
-      "--accept-dns=true" # Accept DNS settings from Headscale
+      "--accept-routes"
+      "--accept-dns=${if bypassHeadscaleDns then "false" else "true"}"
+    ]
+    ++ lib.optionals (tags != [ ]) [
+      "--advertise-tags=${lib.concatStringsSep "," tags}"
     ];
 
     useRoutingFeatures = "both";
@@ -26,9 +40,7 @@
     trustedInterfaces = [ "tailscale0" ];
   };
 
-  # Tailscale's MagicDNS requires systemd-resolved on NixOS
   services.resolved.enable = true;
 
-  # Backup
   services.restic.backups.daily.paths = [ "/var/lib/tailscale" ];
 }

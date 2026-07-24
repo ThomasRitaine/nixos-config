@@ -19,7 +19,13 @@
       inherit config lib pkgs;
       enableAppBackup = true;
     })
-    ../../modules/nixos/tailscale.nix
+    (import ../../modules/nixos/tailscale.nix {
+      isHeadscaleServer = true;
+      tags = [
+        "tag:server"
+        "tag:exit"
+      ];
+    })
     ../../modules/nixos/tor.nix
     ../../modules/nixos/traefik
     ./users.nix

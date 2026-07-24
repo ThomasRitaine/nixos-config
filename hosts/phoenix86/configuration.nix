@@ -14,7 +14,11 @@
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/cloudflared.nix
     ../../modules/nixos/beszel-agent.nix
-    ../../modules/nixos/tailscale.nix
+    ../../modules/nixos/adguardhome.nix
+    (import ../../modules/nixos/tailscale.nix {
+      bypassHeadscaleDns = true;
+      tags = [ "tag:home" ];
+    })
     (import ../../modules/nixos/garage.nix { })
     ./garage-external-drive.nix
     (import ../../modules/nixos/restic { inherit config lib pkgs; })

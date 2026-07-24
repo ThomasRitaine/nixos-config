@@ -14,7 +14,7 @@
     (import ../../modules/nixos/restic { inherit config lib pkgs; })
     (import ../../modules/nixos/garage.nix { })
     ../../modules/nixos/garage-rsyncnet.nix
-    ../../modules/nixos/tailscale.nix
+    (import ../../modules/nixos/tailscale.nix { })
     ./users.nix
   ];
 
