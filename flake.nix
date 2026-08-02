@@ -31,7 +31,10 @@
 
     colmena.url = "github:zhaofengli/colmena";
 
-    hydenix.url = "github:richen604/hydenix";
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nixos-hardware.url = "github:nixos/nixos-hardware/master";
   };
