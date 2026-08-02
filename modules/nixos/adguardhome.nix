@@ -1,18 +1,19 @@
 { pkgs, ... }:
 let
   phoenix86TailscaleIP = "100.64.0.16";
+  phoenix86LocalEthernetIP = "192.168.1.110";
 in
 {
   services.adguardhome = {
     enable = true;
-    host = "127.0.0.1";
+    host = "0.0.0.0";
     port = 3005;
 
     mutableSettings = true;
 
     settings = {
       dns = {
-        bind_hosts = [ phoenix86TailscaleIP ];
+        bind_hosts = [ "0.0.0.0" ];
         port = 53;
         ratelimit = 0;
         bootstrap_dns = [
@@ -45,22 +46,43 @@ in
   };
 
   systemd.services.adguardhome = {
-    after = [ "tailscaled.service" ];
-    wants = [ "tailscaled.service" ];
+    after = [
+      "network-online.target"
+      "tailscaled.service"
+    ];
+    wants = [
+      "network-online.target"
+      "tailscaled.service"
+    ];
     preStart = ''
       for _ in $(seq 1 30); do
-        if ${pkgs.iproute2}/bin/ip -4 addr show tailscale0 2>/dev/null | grep -q "${phoenix86TailscaleIP}"; then
+        if ${pkgs.iproute2}/bin/ip -4 addr show enp0s20f0u2u4 2>/dev/null | grep -q "${phoenix86LocalEthernetIP}" || \
+           ${pkgs.iproute2}/bin/ip -4 addr show tailscale0 2>/dev/null | grep -q "${phoenix86TailscaleIP}"; then
           exit 0
         fi
         sleep 1
       done
-      echo "tailscale0 did not come up with ${phoenix86TailscaleIP} within 30s" >&2
+      echo "No valid network interfaces (Ethernet or Tailscale) came up within 30s" >&2
       exit 1
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 53 ];
-  networking.firewall.allowedUDPPorts = [ 53 ];
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      53
+      3005
+    ];
+    allowedUDPPorts = [ 53 ];
+  };
+
+  services.resolved = {
+    enable = true;
+    settings.Resolve = {
+      DNSSEC = "false";
+      DNSStubListener = "no";
+    };
+  };
 
   services.restic.backups.daily.paths = [ "/var/lib/AdGuardHome" ];
 }
