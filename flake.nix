@@ -108,6 +108,13 @@
             inputs.home-manager.nixosModules.default
           ];
         };
+        box-office = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/box-office/configuration.nix
+            inputs.home-manager.nixosModules.default
+          ];
+        };
         winix = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [

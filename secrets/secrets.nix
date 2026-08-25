@@ -12,6 +12,7 @@ let
   vps-8karm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+uyYaOKnjmKqZ8Mi+eYgfEsLi7wYnxcHi7z6xb4b1z";
   phoenix86 = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIS+yO1Hkid/PDkYibhe1TtCVL11MzQkMIaP9ThpeDzK";
   antoinette = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPD5xO2Kus9IQqTzJEc73S9wk9brnfrr19+usb8aqC6A";
+  box-office = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBYRzUAsiBlIgd6+MKN/Y4oO2YVQw3s4NyekciCCUgLD";
   oracleHosts = {
     orarm = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+Y7b+rqdmp99Y6IBnrfs5I9WvAuGbz3pfrsg7A0J+A";
     pharaoh = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJL6MIeBTmTbS6rUFPQ0T1QW0E/TFzD9/g3k+fAXCneO";
@@ -33,6 +34,7 @@ let
     vps-8karm
     phoenix86
     antoinette
+    box-office
   ]
   ++ (builtins.attrValues oracleHosts);
 
@@ -68,6 +70,11 @@ in
   "servers/antoinette/thomas-password.age".publicKeys = admins ++ [ antoinette ];
   "servers/antoinette/root-password.age".publicKeys = admins ++ [ antoinette ];
   "servers/antoinette/restic-password.age".publicKeys = admins ++ [ antoinette ];
+
+  # box-office
+  "servers/box-office/thomas-password.age".publicKeys = admins ++ [ box-office ];
+  "servers/box-office/root-password.age".publicKeys = admins ++ [ box-office ];
+  "servers/box-office/restic-password.age".publicKeys = admins ++ [ box-office ];
 
   # rsync.net
   "servers/rsyncnet-ssh-key.age".publicKeys = admins ++ [ oracleHosts.orarm ];

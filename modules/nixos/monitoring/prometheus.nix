@@ -9,6 +9,7 @@ let
   additionalHosts = [
     "phoenix86"
     "antoinette"
+    "box-office"
   ];
   allHosts = lib.unique ([ config.networking.hostName ] ++ additionalHosts ++ oracleHosts);
 
