@@ -75,6 +75,10 @@ in
   "servers/box-office/thomas-password.age".publicKeys = admins ++ [ box-office ];
   "servers/box-office/root-password.age".publicKeys = admins ++ [ box-office ];
   "servers/box-office/restic-password.age".publicKeys = admins ++ [ box-office ];
+  "servers/box-office/ha-secrets.age".publicKeys = admins ++ [ box-office ];
+  "servers/box-office/zwave-secrets.age".publicKeys = admins ++ [ box-office ];
+  "servers/box-office/frigate-env.age".publicKeys = admins ++ [ box-office ];
+  "servers/box-office/mqtt-password.age".publicKeys = admins ++ [ box-office ];
 
   # rsync.net
   "servers/rsyncnet-ssh-key.age".publicKeys = admins ++ [ oracleHosts.orarm ];
