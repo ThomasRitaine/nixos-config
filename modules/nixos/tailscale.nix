@@ -22,6 +22,7 @@
     authKeyFile = config.age.secrets.tailscale-token.path;
 
     extraUpFlags = [
+      "--reset"
       "--login-server=https://vpn.thomas.ritaine.com"
       "--advertise-exit-node"
       "--accept-routes"

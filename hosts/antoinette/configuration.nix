@@ -9,7 +9,7 @@
     ./hardware-configuration.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/beszel-agent.nix
-    ../../modules/nixos/tailscale.nix
+    (import ../../modules/nixos/tailscale.nix { tags = [ ]; })
     (import ../../modules/nixos/garage.nix { })
     (import ../../modules/nixos/restic { inherit config lib pkgs; })
     ./users.nix
