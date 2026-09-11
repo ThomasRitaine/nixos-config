@@ -112,7 +112,12 @@
       bind Tab next-window
       unbind p
       bind BTab previous-window
+
+      # prefix + C-l: clear screen, reset terminal state, and clear history
+      bind C-l send-keys C-l \; send-keys -R \; clear-history
+
+      # prefix + R: kill current process and respawn the pane
+      bind R respawn-pane -k \; display "Pane Respawned!"
     '';
   };
 }
-
