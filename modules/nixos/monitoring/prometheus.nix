@@ -71,6 +71,4 @@ in
       }
     ];
   };
-
-  services.restic.backups.daily.paths = [ "/var/lib/prometheus2" ];
 }
