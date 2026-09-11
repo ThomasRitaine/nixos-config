@@ -13,6 +13,7 @@
     ./nginx.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/cloudflared.nix
+    ../../modules/nixos/docker.nix
     ../../modules/nixos/beszel-agent.nix
     ../../modules/nixos/adguardhome.nix
     (import ../../modules/nixos/tailscale.nix {

@@ -18,6 +18,7 @@
       description = "Thomas";
       home = "/home/thomas";
       extraGroups = [
+        "docker"
         "wheel"
         "networkmanager"
       ];
