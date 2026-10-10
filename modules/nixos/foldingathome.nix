@@ -1,5 +1,9 @@
 { config, ... }:
-
+let
+  # Folding@home image version, bump deliberately.
+  # List tags: podman search --list-tags --limit 2000 lscr.io/linuxserver/foldingathome
+  fahImage = "lscr.io/linuxserver/foldingathome:8.5.6-ls217";
+in
 {
   virtualisation.containers.enable = true;
   virtualisation.podman.enable = true;
@@ -15,8 +19,7 @@
   virtualisation.oci-containers = {
     backend = "podman";
     containers.foldingathome = {
-      image = "lscr.io/linuxserver/foldingathome:latest";
-
+      image = fahImage;
       volumes = [
         "/var/lib/foldingathome:/config:rw"
         "${config.age.secrets.foldingathome-token.path}:/run/secrets/token:ro,Z"
