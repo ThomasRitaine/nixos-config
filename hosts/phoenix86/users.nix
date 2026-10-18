@@ -27,8 +27,8 @@
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOFDBWxSC0X5OEFoc+DK8ZmWrDERNQwGzUNG8261IedI Thomas Ritaine"
       ];
     };
-    tissou = {
-      hashedPasswordFile = config.age.secrets.tissou-password.path;
-    };
+    # tissou = {
+    #   hashedPasswordFile = config.age.secrets.tissou-password.path;
+    # };
   };
 }

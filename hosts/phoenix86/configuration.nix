@@ -8,7 +8,7 @@
   imports = [
     ./disko-wd-elements.nix
     ./hardware-configuration.nix
-    ./remote-desktop.nix
+    # ./remote-desktop.nix
     ./users.nix
     ./nginx.nix
     ../../modules/nixos/server/common.nix
