@@ -16,6 +16,7 @@
     ../../modules/nixos/docker.nix
     ../../modules/nixos/beszel-agent.nix
     ../../modules/nixos/adguardhome.nix
+    ../../modules/nixos/nintendo-switch
     (import ../../modules/nixos/tailscale.nix {
       bypassHeadscaleDns = true;
       tags = [ "tag:home" ];

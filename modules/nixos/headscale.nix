@@ -76,7 +76,13 @@ in
         {
           "src": ["autogroup:member"],
           "dst": ["tag:home"],
-          "ip": ["udp:53", "tcp:53"]
+          "ip": [
+            // DNS
+            "udp:53", "tcp:53",
+            // Sunshine client ports (HTTPS/HTTP API, RTSP, Video/Input/Audio)
+            "tcp:47984", "tcp:47989", "tcp:48010",
+            "udp:47998-48000", "udp:48010"
+          ]
         },
         {
           "src": ["tag:server"],
