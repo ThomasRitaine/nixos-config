@@ -30,7 +30,11 @@
     loader.timeout = 5;
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    kernelParams = [ "consoleblank=30" ];
+    kernelParams = [
+      "consoleblank=30"
+      "i8042.nokbd"
+    ];
+    kernel.sysctl."net.ipv4.ip_nonlocal_bind" = 1;
   };
 
   swapDevices = [
