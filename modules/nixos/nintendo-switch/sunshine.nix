@@ -45,6 +45,9 @@
     description = "Swap A/B and X/Y buttons strictly for Sunshine virtual gamepad (%I)";
     serviceConfig = {
       Type = "simple";
+      # Lock raw device to root-only (0600) so SDL3/Eden cannot open it for rumble ioctls
+      # and Pegasus/Eden don't see duplicate controllers:
+      ExecStartPre = "${pkgs.coreutils}/bin/chmod 0600 /dev/input/%I";
       ExecStart = ''
         ${pkgs.evsieve}/bin/evsieve \
           --input /dev/input/%I grab \

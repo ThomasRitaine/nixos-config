@@ -18,6 +18,12 @@ let
     exec ${pkgs.bash}/bin/bash ${./scripts/eden-settings.sh}
   '';
 
+  # Controller preset switcher (used by Pegasus "Controllers" tab and CLI)
+  setSwitchControllers = pkgs.writeShellScriptBin "set-switch-controllers" ''
+    set -euo pipefail
+    exec ${pkgs.python3}/bin/python3 ${./scripts/set-switch-controllers.py} "$@"
+  '';
+
   # Metadata generator: wraps the external Python script with Nix store paths
   updatePegasusMetadata = pkgs.writeShellScriptBin "update-pegasus-metadata" ''
     set -euo pipefail
@@ -29,7 +35,8 @@ let
       --rom-dir "${romDir}" \
       --eden-bin "${pkgs.eden}/bin/eden" \
       --eden-home-script "${edenHome}" \
-      --eden-gui-script "${edenGui}"
+      --eden-gui-script "${edenGui}" \
+      --set-controllers-bin "${setSwitchControllers}/bin/set-switch-controllers"
 
     chown -R nintendo-switch:users "${home}/ROMs"
   '';
@@ -176,6 +183,7 @@ in
     pegasus-frontend
     updatePegasusMetadata
     importSwitchGames
+    setSwitchControllers
     pulseaudio
     alsa-utils
     usbutils
@@ -188,7 +196,7 @@ in
 
   systemd.slices."user-1100".sliceConfig = {
     CPUWeight = 80;
-    MemoryHigh = "6G";
+    MemoryHigh = "8G";
   };
 
   services.udev.extraRules = ''
