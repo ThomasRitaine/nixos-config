@@ -39,11 +39,11 @@ BINDINGS_TEMPLATE = {
     "button_srright": '"{prefix},button:5"',
     "lstick": (
         '"{prefix},axis_x:0,axis_y:1,offset_x:-0.000000,offset_y:0.000000,'
-        'invert_x:+,invert_y:+,deadzone:0.150000"'
+        'invert_x:+,invert_y:+,deadzone:{deadzone}"'
     ),
     "rstick": (
         '"{prefix},axis_x:3,axis_y:4,offset_x:-0.000000,offset_y:0.000000,'
-        'invert_x:+,invert_y:+,deadzone:0.150000"'
+        'invert_x:+,invert_y:+,deadzone:{deadzone}"'
     ),
     "motionleft": "[empty]",
     "motionright": "[empty]",
@@ -68,6 +68,7 @@ def write_input_profiles():
     PROFILE_DIR.mkdir(parents=True, exist_ok=True)
     for name, guid in GUIDS.items():
         vib = "true" if name == "8bitdo" else "false"
+        deadzone = "0.150000" if name == "8bitdo" else "0.020000"
         prefix = f"engine:sdl,port:0,guid:{guid}"
         lines = [
             "[Controls]",
@@ -80,7 +81,7 @@ def write_input_profiles():
         ]
         for k, tmpl in BINDINGS_TEMPLATE.items():
             lines.append(f"{k}\\default=false")
-            lines.append(f"{k}={tmpl.format(prefix=prefix)}")
+            lines.append(f"{k}={tmpl.format(prefix=prefix, deadzone=deadzone)}")
         p = PROFILE_DIR / f"{name}.ini"
         p.write_text("\n".join(lines) + "\n", encoding="utf-8")
 
@@ -131,6 +132,7 @@ def main():
             port_counters[ctype] += 1
             guid = GUIDS[ctype]
             is_8bitdo = ctype == "8bitdo"
+            deadzone = "0.150000" if is_8bitdo else "0.020000"
 
             text = set_ini_key(text, f"{p_prefix}_type", "0", "true")
             text = set_ini_key(text, f"{p_prefix}_connected", "true", "false")
@@ -147,7 +149,7 @@ def main():
                 text = set_ini_key(
                     text,
                     f"{p_prefix}_{btn_key}",
-                    tmpl.format(prefix=sdl_prefix),
+                    tmpl.format(prefix=sdl_prefix, deadzone=deadzone),
                     "false",
                 )
         else:

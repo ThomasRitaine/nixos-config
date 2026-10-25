@@ -11,6 +11,7 @@
     # ./remote-desktop.nix
     ./users.nix
     ./nginx.nix
+    ./thermal.nix
     ../../modules/nixos/server/common.nix
     ../../modules/nixos/cloudflared.nix
     ../../modules/nixos/docker.nix

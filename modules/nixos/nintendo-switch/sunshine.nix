@@ -1,52 +1,58 @@
 { pkgs, ... }:
 
+let
+  # EDID captured from the attached Philips 242E1GJ monitor.
+  # Forcing it on HDMI-A-1 keeps the connector enabled when nothing is plugged in
+  # (headless KMS capture for Gamescope and Sunshine) and exposes the monitor's
+  # audio capabilities when it is connected.
+  monitorEdid = pkgs.runCommand "edid-monitor" { } ''
+    install -Dm444 ${./edid/monitor.bin} $out/lib/firmware/edid/monitor.bin
+  '';
+in
 {
-  # Virtual 1080p60 EDID on HDMI-A-1:
-  # - Unplugged: forces HDMI-A-1 "connected" so gamescope & Sunshine KMS work headlessly.
-  # - Plugged in: drives standard 1080p60 CEA timings out of the physical HDMI port to the monitor.
   hardware.display = {
-    edid.modelines."fake-1080p" = "148.50  1920 2008 2052 2200  1080 1084 1089 1125  +hsync +vsync";
+    edid.packages = [ monitorEdid ];
     outputs."HDMI-A-1" = {
-      edid = "fake-1080p.bin";
-      mode = "1920x1080@60e"; # 'e' forces connector enabled; matches modeline resolution & refresh
+      edid = "monitor.bin";
+      mode = "1920x1080@60e"; # 'e' forces the connector on
     };
   };
 
   # Sunshine: captures the screen and streams it to Moonlight
   services.sunshine = {
     enable = true;
-    autoStart = true; # explicit default: binds to graphical-session.target
-    capSysAdmin = true; # needed for KMS screen capture
+    autoStart = true; # binds to graphical-session.target
+    capSysAdmin = true; # required for KMS capture
     openFirewall = false;
     settings = {
+      audio_sink = "game-audio";
       capture = "kms";
-      encoder = "vaapi"; # encode on the Iris Xe, not the CPU
+      encoder = "vaapi"; # hardware encoding on the Iris Xe
       adapter_name = "/dev/dri/renderD128";
       gamepad = "xone"; # Xbox One virtual pad (not grabbed by joycond)
-      back_button_timeout = 1000; # hold Select (-) for 1s to emulate the Home button
+      back_button_timeout = 1000; # hold Select (-) for 1 s to emulate the Home button
     };
   };
 
-  # Required for autoStart under greetd + gamescope:
+  # Required for autoStart under greetd + Gamescope
   systemd.user.services.sunshine.unitConfig.ConditionUser = "nintendo-switch";
   systemd.user.targets.graphical-session.wantedBy = [ "default.target" ];
 
-  # Lets Moonlight's touch, keyboard and gamepad act as real inputs
+  # Lets Moonlight touch, keyboard and gamepad input act as real devices
   hardware.uinput.enable = true;
   users.users.nintendo-switch.extraGroups = [ "uinput" ];
 
-  # Swap A<->B and X<->Y ONLY on "Sunshine X-Box One (virtual) pad" so Moonlight's
-  # Switch-style on-screen layout matches the physical 8BitDo Pro 3 buttons:
+  # Swap A/B and X/Y on the Sunshine virtual pad only, so Moonlight's
+  # Switch-style on-screen layout matches the physical 8BitDo buttons.
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="input", KERNEL=="event*", ATTRS{name}=="Sunshine X-Box One (virtual) pad", TAG+="systemd", ENV{SYSTEMD_WANTS}="sunshine-pad-remap@$kernel.service"
   '';
 
   systemd.services."sunshine-pad-remap@" = {
-    description = "Swap A/B and X/Y buttons strictly for Sunshine virtual gamepad (%I)";
+    description = "Swap A/B and X/Y on the Sunshine virtual gamepad (%I)";
     serviceConfig = {
       Type = "simple";
-      # Lock raw device to root-only (0600) so SDL3/Eden cannot open it for rumble ioctls
-      # and Pegasus/Eden don't see duplicate controllers:
+      # Restrict the raw device to root so Eden/SDL neither opens it nor sees a duplicate controller
       ExecStartPre = "${pkgs.coreutils}/bin/chmod 0600 /dev/input/%I";
       ExecStart = ''
         ${pkgs.evsieve}/bin/evsieve \
@@ -60,19 +66,19 @@
     };
   };
 
-  # Open Sunshine's ports on Tailscale only, not on your home network
+  # Sunshine ports, reachable over Tailscale only
   networking.firewall.interfaces."tailscale0" = {
     allowedTCPPorts = [
-      47984 # HTTPS API (app list, PIN verification, launch)
-      47989 # HTTP API (discovery, handshake)
-      47990 # Web UI (admin setup, PIN entry)
-      48010 # RTSP stream handshake
+      47984 # HTTPS API
+      47989 # HTTP API
+      47990 # Web UI
+      48010 # RTSP
     ];
     allowedUDPPorts = [
       47998 # Video
-      47999 # Control/Input
+      47999 # Control / input
       48000 # Audio
-      48010 # RTSP stream handshake fallback
+      48010 # RTSP fallback
     ];
   };
 }
