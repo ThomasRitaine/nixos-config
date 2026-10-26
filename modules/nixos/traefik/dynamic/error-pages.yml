@@ -12,7 +12,9 @@ http:
   middlewares:
     error-pages:
       errors:
-        status: "400-599"
+        status:
+          - "400"
+          - "402-599"
         service: "error-pages"
         query: "/{status}.html"
 
