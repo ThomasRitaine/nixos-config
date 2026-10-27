@@ -50,6 +50,7 @@
         data_dir = "/var/lib/garage/data";
         db_engine = "sqlite";
 
+        metadata_auto_snapshot_interval = "6h";
         replication_factor = 2;
         consistency_mode = "consistent";
         compression_level = 1;
@@ -159,7 +160,11 @@
       '';
     };
 
-    # Backup
-    services.restic.backups.daily.paths = [ "/var/lib/garage/meta" ];
+    # Backup: only the cluster layout (tiny, identical on all nodes, safe to copy live).
+    # The metadata DB itself is NOT backed up with restic:
+    # - Node loss is covered by replication_factor = 2 (rebuild via layout --replace).
+    # - Local DB corruption is covered by metadata_auto_snapshot_interval above,
+    #   or by deleting the DB and running a full table repair from replicas.
+    services.restic.backups.daily.paths = [ "/var/lib/garage/meta/cluster_layout" ];
   };
 }
