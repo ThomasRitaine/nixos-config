@@ -1,8 +1,4 @@
-{ pkgs, ... }:
-let
-  phoenix86TailscaleIP = "100.64.0.16";
-  phoenix86LocalEthernetIP = "192.168.1.110";
-in
+{ lib, ... }:
 {
   services.adguardhome = {
     enable = true;
@@ -13,18 +9,22 @@ in
 
     settings = {
       dns = {
+        # Listening on every interface means AdGuard needs no specific IP to exist at boot
         bind_hosts = [ "0.0.0.0" ];
         port = 53;
         ratelimit = 0;
+        # Only used to resolve hostnames in upstreams; the upstreams below are IP-based
         bootstrap_dns = [
           "1.1.1.1"
-          "8.8.8.8"
+          "9.9.9.9"
         ];
         upstream_dns = [
-          "https://dns.cloudflare.com/dns-query"
-          "tls://dns.google"
+          "https://1.1.1.1/dns-query"
+          "https://8.8.8.8/dns-query"
         ];
       };
+      # The router handles DHCP; this stops the "starting dhcp server" error at every start
+      dhcp.enabled = false;
       filtering = {
         protection_enabled = true;
       };
@@ -54,18 +54,14 @@ in
       "network-online.target"
       "tailscaled.service"
     ];
-    preStart = ''
-      for _ in $(seq 1 30); do
-        if ${pkgs.iproute2}/bin/ip -4 addr show enp0s20f0u2u4 2>/dev/null | grep -q "${phoenix86LocalEthernetIP}" || \
-           ${pkgs.iproute2}/bin/ip -4 addr show tailscale0 2>/dev/null | grep -q "${phoenix86TailscaleIP}"; then
-          exit 0
-        fi
-        sleep 1
-      done
-      echo "No valid network interfaces (Ethernet or Tailscale) came up within 30s" >&2
-      exit 1
-    '';
   };
+
+  # The host's own DNS uses the local AdGuard first, so it never depends on the
+  # ISP's DHCP DNS list. This keeps exit-node DNS working for tailnet clients.
+  networking.nameservers = lib.mkBefore [
+    "127.0.0.1"
+    "1.1.1.1"
+  ];
 
   networking.firewall = {
     enable = true;

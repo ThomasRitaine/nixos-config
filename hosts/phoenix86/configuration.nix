@@ -48,6 +48,7 @@
 
   networking.hostName = "phoenix86";
   networking.networkmanager.enable = true;
+  networking.networkmanager.ethernet.macAddress = "8c:3b:4a:68:f9:d4";
 
   services.logind.settings.Login.HandleLidSwitch = "ignore";
   services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
