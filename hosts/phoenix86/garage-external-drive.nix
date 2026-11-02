@@ -15,4 +15,6 @@
   systemd.tmpfiles.rules = [
     "d /mnt/wd-elements/garage-data 0700 root root -"
   ];
+
+  systemd.services.garage.unitConfig.RequiresMountsFor = [ "/mnt/wd-elements" ];
 }
