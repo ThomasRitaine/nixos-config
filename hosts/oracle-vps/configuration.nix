@@ -28,7 +28,6 @@
         efiSysMountPoint = "/boot";
       };
     };
-    initrd.systemd.enable = true;
   };
 
   swapDevices = [{
