@@ -2,12 +2,13 @@
 {
   services.adguardhome = {
     enable = true;
-    host = "0.0.0.0";
-    port = 3005;
-
     mutableSettings = true;
 
     settings = {
+      # Web UI on every interface, port 3005. The firewall below keeps it off the
+      # LAN; it stays reachable over the tailnet, as tailscale0 is trusted.
+      http.address = "0.0.0.0:3005";
+
       dns = {
         # Listening on every interface means AdGuard needs no specific IP to exist at boot
         bind_hosts = [ "0.0.0.0" ];
