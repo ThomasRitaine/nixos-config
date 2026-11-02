@@ -19,6 +19,11 @@
           "9.9.9.9" # Quad9
         ];
         upstream_dns = [
+          # Tailnet names (*.internal) via tailscaled's local resolver. It answers
+          # MagicDNS names even with --accept-dns=false and forwards nothing else,
+          # so there is no loop. Covers programs that bypass systemd-resolved
+          # (dig, Docker containers, Go/musl binaries) on this host.
+          "[/internal/]100.100.100.100"
           "https://1.1.1.1/dns-query" # Cloudflare
           "https://8.8.8.8/dns-query" # Google
         ];
